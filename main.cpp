@@ -11,7 +11,7 @@ using namespace std;
 //#define FALSE 0
 
 //constantes
-#define MAXTOKEN 20
+#define MAXTOKEN 50 //limite original para hacer pruebas
 #define NUMPALRES 4
 #define MAX 50
 
@@ -520,7 +520,7 @@ void vanalisislexico()
                 viniedos();
                 break;//Hasta aqui jala bien
            case 38: cCarent = nextchar();
-               if(cCarent == '<')
+               if(cCarent == '<' || cCarent == '>')
                  edoAct = 39;
                else
                  falla();
@@ -529,7 +529,7 @@ void vanalisislexico()
             if(cCarent == '=')
               edoAct = 40;//37?
             else
-              edoAct = 41;
+              edoAct = 40;
              break;
             case 40: strcpy(asTokens[k++], "op.rel");
                 if (indice>=numBytesArch)
@@ -537,12 +537,12 @@ void vanalisislexico()
                 iniToken=indice;
                 viniedos();
                 break;
-            case 41: strcpy(asTokens[k++], "op.rel");
+            /*case 41: strcpy(asTokens[k++], "op.rel");
                 if (indice>=numBytesArch)
                  return;
                 iniToken=indice;
                 viniedos();
-                break;
+                break;*/
 
 
         }/*switch*/
