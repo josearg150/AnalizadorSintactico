@@ -58,7 +58,8 @@ int estoken(char x[]);
 bool finarch = false;
 FILE *Fd;//puntero a un archivo file document
 
-char token[16][8] = {"x",";",",","*","id","[","]","num","char","int","float","puts","(",")","Cte.Lit","asign"};
+char token[17][8] = {"x",";",",","*","id","[","]","num","char","int","float","puts","(",")","Cte.Lit",
+                     "asign","op.rel"};
 
 char varsint[13][3]={"x","D","L","L'","I","I'","A","A'","K","T","F","E","P"};
 
@@ -171,9 +172,9 @@ void generararch()
 
     puts("teclea el archivo : ");
             //cin.get();  //eliminar el enter
-   // printf("Tecela <ESC> -USAR UNICODE DEL ESC -para terminar el archivo \n");
+   // printf("Teclea <ESC> -USAR UNICODE DEL ESC -para terminar el archivo \n");
 
-    printf("Tecela @ para terminar el archivo \n");
+    printf("Teclea @ para terminar el archivo \n");
 
     //LA INFO ESTA EN EL BUFFER
 
@@ -481,27 +482,61 @@ void vanalisislexico()
                  edoAct = 32;
                else
                  falla();
-           break;
-            case 32: strcpy(asTokens[k++], "asign");
-               if (indice>=numBytesArch)
-               return;
-               iniToken=indice;
-               viniedos();
-             break;
-
-            /*cCarent = nextchar();
+                break;
+            case 32:cCarent = nextchar();
                 if(cCarent == '=')
-                edoAct = 34;
-              else
-                edoAct = 33;
-            break;*/
-           /* case 33: strcpy(asTokens[k++], "asign");
+                  edoAct = 34;
+                else
+                  edoAct = 33;
+                 break;
+            case 33: strcpy(asTokens[k++], "asign");
+               if (indice>=numBytesArch)
+                 return;
+                iniToken=indice;
+                viniedos();
+                break;
+            case 34: strcpy(asTokens[k++], "op.rel");
+               if (indice>=numBytesArch)
+                 return;
+                iniToken=indice;
+                viniedos();
+                break;
+            case 35: cCarent = nextchar();
+               if(cCarent == '!')
+                 edoAct = 36;
+               else
+                 falla();
+                break;
+            case 36:cCarent = nextchar();
+               if(cCarent == '=')
+                 edoAct = 37;
+               else
+                 falla();
+                break;
+            case 37: strcpy(asTokens[k++], "op.rel");
+               if (indice>=numBytesArch)
+                 return;
+                iniToken=indice;
+                viniedos();
+                break;//Hasta aqui jala bien
+          /* case 38: cCarent = nextchar();
+               if(cCarent == '<')
+                 edoAct = 39;
+               else
+                 falla();
+                break;
+            case 39: cCarent = nextchar();
+                if(cCarent == '=')
+                  edoAct = 40;
+                else
+                  edoAct = 40;
+                 break;
+            case 40: strcpy(asTokens[k++], "op.rel");
                 if (indice>=numBytesArch)
-                return;
-            iniToken=indice;
-            viniedos();
-            break;*/
-
+                 return;
+                iniToken=indice;
+                viniedos();
+                break;*/
 
         }/*switch*/
     } /*while*/
@@ -531,7 +566,8 @@ int edoActesacept()
     {
         case 8: case 5: case 7: case 6: case 3:
         case 12: case 15: case 17: case 19: case 21:
-        case 23 : case 26: case 28: case 30:
+        case 23 : case 26: case 28: case 30: case 33:
+        case 34: case 37: case 40:
             return true;
         default : return false;
     }
@@ -584,8 +620,24 @@ void falla()
         case 29:  edoIni=31;
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
-            break;//recuperaerror();
-        case 31: recuperaerror();
+            break;
+        case 31:  edoIni=35;
+            indice = iniToken;
+            fseek(Fd, (long)iniToken, SEEK_SET);
+            break;
+      /*  case 35:  edoIni=38;
+            indice = iniToken;
+            fseek(Fd, (long)iniToken, SEEK_SET);
+            break;
+        case 36:  edoIni=39;
+            indice = iniToken;
+            fseek(Fd, (long)iniToken, SEEK_SET);
+            break;
+        case 38:  edoIni=41;
+            indice = iniToken;
+            fseek(Fd, (long)iniToken, SEEK_SET);
+            break;*/
+        case 35: recuperaerror();
     }
     edoAct=edoIni;
 }
@@ -754,7 +806,7 @@ int buscaTabla(char a[], char x[])
 {
     //se usan dos indices para representar x y a que seran comparados
     int indx=0, inda=0, i;
-    for(i = 0; i < 15; i++)//El primer ciclo compara contra el arreglo token  para compara si contiene
+    for(i = 0; i < 17; i++)//El primer ciclo compara contra el arreglo token  para compara si contiene
         if(strcmp(a,token[i])==0)//un identificador
             inda = i;     //break;
     for(i = 0; i < 13; i++)
