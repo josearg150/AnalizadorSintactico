@@ -58,7 +58,7 @@ int estoken(char x[]);
 bool finarch = false;
 FILE *Fd;//puntero a un archivo file document
 
-char token[15][8] = {"x",";",",","*","id","[","]","num","char","int","float","puts","(",")","Cte.Lit"};
+char token[16][8] = {"x",";",",","*","id","[","]","num","char","int","float","puts","(",")","Cte.Lit","asign"};
 
 char varsint[13][3]={"x","D","L","L'","I","I'","A","A'","K","T","F","E","P"};
 
@@ -244,6 +244,7 @@ int bytesarch()
     return aux;
 }
 // USAR SU ANALIZADOR LEXICA
+
 void vanalisislexico()
 {
     char cCarent;
@@ -281,7 +282,7 @@ void vanalisislexico()
                         edoAct=3;
                 break;
             case 3: vretract();
-                strcpy(asTokens[k++],"Num");
+                strcpy(asTokens[k++],"num");//Estaba en mayusucula
                 if (indice >= numBytesArch)
                     return;
                 iniToken=indice;
@@ -351,7 +352,7 @@ void vanalisislexico()
                 break;
                 // NON - PAR
             case 12: vretract();
-                strcpy(asTokens[k++],"Num");
+                strcpy(asTokens[k++],"num");
                 if (indice>=numBytesArch)
                     return;
                 iniToken=indice;
@@ -371,7 +372,7 @@ void vanalisislexico()
                 break;
             case 15: vretract();
                 if(esId())
-                    strcpy(asTokens[k++], "Id");
+                    strcpy(asTokens[k++], "id");//Estaba escrito diferente al arreglo
                 else
                     strcpy(asTokens[k++],sLexema);
                 if(indice>=numBytesArch)
@@ -466,7 +467,7 @@ void vanalisislexico()
             case 29:cCarent=nextchar();
                 if(cCarent == ')')
                     edoAct=30;
-                else
+                else          
                     falla();
                 break;
             case 30: strcpy(asTokens[k++], ")");
@@ -475,6 +476,32 @@ void vanalisislexico()
                 iniToken=indice;
                 viniedos();
                 break;
+            case 31: cCarent = nextchar();
+               if(cCarent == '=')
+                 edoAct = 32;
+               else
+                 falla();
+           break;
+            case 32: strcpy(asTokens[k++], "asign");
+               if (indice>=numBytesArch)
+               return;
+               iniToken=indice;
+               viniedos();
+             break;
+
+            /*cCarent = nextchar();
+                if(cCarent == '=')
+                edoAct = 34;
+              else
+                edoAct = 33;
+            break;*/
+           /* case 33: strcpy(asTokens[k++], "asign");
+                if (indice>=numBytesArch)
+                return;
+            iniToken=indice;
+            viniedos();
+            break;*/
+
 
         }/*switch*/
     } /*while*/
@@ -554,7 +581,11 @@ void falla()
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;
-        case 29:  recuperaerror();
+        case 29:  edoIni=31;
+            indice = iniToken;
+            fseek(Fd, (long)iniToken, SEEK_SET);
+            break;//recuperaerror();
+        case 31: recuperaerror();
     }
     edoAct=edoIni;
 }
@@ -698,12 +729,13 @@ void insertapila(string elem)//(char *elem) //(char elem[])
 
 void eliminapila()
 {
+    //Comparacion para saber cantidad de la pila (si esta vacia
     if(cima == -1)
         puts("Pila Vacia");
     else
     {
-        strcpy(pilac[cima],"");
-        cima--;
+        strcpy(pilac[cima],"");//en la cima se pone cadena vacia y se decrementa
+        cima--; //Elimninar cuando x = a
     }
 }
 
@@ -720,18 +752,19 @@ int estoken(char x[])
 
 int buscaTabla(char a[], char x[])
 {
+    //se usan dos indices para representar x y a que seran comparados
     int indx=0, inda=0, i;
-    for(i = 0; i < 15; i++)
-        if(strcmp(a,token[i])==0)
+    for(i = 0; i < 15; i++)//El primer ciclo compara contra el arreglo token  para compara si contiene
+        if(strcmp(a,token[i])==0)//un identificador
             inda = i;     //break;
     for(i = 0; i < 13; i++)
-        if(strcmp(x,varsint[i])==0)
+        if(strcmp(x,varsint[i])==0)//Compara contra el arreglo de tablas de producciones
             indx=i;
     for(i = 0; i < 25; i++)
     {
-        if(indx == tablaM[i][0])
-            if(inda == tablaM[i][1])
-                return i;
+        if(indx == tablaM[i][0])//si la posicion del indice x se encuentra en la matriz
+            if(inda == tablaM[i][1])//Comparamos si el token tambien se encuentra
+                return i;//se regresa el indice
     }
     return 999;
 }
