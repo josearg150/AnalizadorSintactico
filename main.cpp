@@ -95,7 +95,7 @@ int main(void)
     {
         // puts("Generar el Archivo (s/n) : ");
 
-        cout << "Generar el Archivo (s/n) : ";
+        cout << "¿Generar el archivo? (s/n): ";
         //cin>>resp;
         resp = cin.get();
 
@@ -113,7 +113,7 @@ int main(void)
 
         if (numBytesArch == 0)
         {
-            printf("El archivo NO Tiene Datos. Pulse una tecla");
+            printf("El archivo no tiene datos. Pulsa una tecla.");
             if (cin.get() == 0)
             {
                 cin.get(); // getch();
@@ -126,15 +126,15 @@ int main(void)
             vanalisislexico();
         fclose(Fd);
 
-        printf("Salida del Analizador Lexico (asTokens)");
+        printf("Salida del Analizador Léxico (asTokens):");
         vmuestra();
 
-        printf("Pulse una tecla para continuar");
+        printf("Pulsa una tecla para continuar.");
         if (cin.get() == 0) // getch()==0)
             cin.get();      // getch();
         vanalisis_sintactico();
         cin.get();
-        printf("Presiona (sS) para continuar ? : ");
+        printf("Presiona (sS) para continuar: ");
         cin >> resp;
     } while (strchr("Ss", resp));
 
@@ -150,22 +150,22 @@ void generararch()
     // cin.getline(nombre,100,'\n');
 
     string nombre;
-    printf("Nombre del Archivo a GENERAR (sin extension): ");
-    // gets(Nombre);  //<--- ERROR CON ESTE METODO
+    printf("Nombre del archivo a generar (sin extensión): ");
+    // gets(Nombre);  // <--- ERROR CON ESTE METODO
     cin >> nombre;
 
-    // cin.get();    //ELIMINAR ENTER
+    // cin.get();    // ELIMINAR ENTER
 
-    sprintf(nomArch, "%s.dat", nombre.c_str()); //se concatena el nombre del archivo en el arreglo
-    Fd = fopen(nomArch, "w+b");                 //se dan permisos de escritura "write " y para escribir en binario
+    sprintf(nomArch, "%s.dat", nombre.c_str()); // se concatena el nombre del archivo en el arreglo
+    Fd = fopen(nomArch, "w+b");                 // se dan permisos de escritura "write " y para escribir en binario
     if (Fd == NULL)
     {
-        cout << "NO SE PUEDE ABRIR EL ARCHIVO : " << nomArch;
+        cout << "No se puede abrir el archivo." << nomArch;
         exit(-1);
     }
-    //imprime en consola la entrada del usuario
+    // imprime en consola la entrada del usuario
 
-    puts("teclea el archivo : ");
+    puts("Teclea el nombre del archivo: ");
     // cin.get();  // eliminar el enter
     // printf("Teclea <ESC> -USAR UNICODE DEL ESC -para terminar el archivo \n");
 
@@ -197,7 +197,7 @@ void vabrirarch()
     //char nombre[100];
     char *nombre = new char[100];
 
-    printf("\n\n Nombre del Archivo a ABRIR(sin extension): ");
+    printf("\n\n Nombre del archivo a abrir (sin extensión): ");
     //gets(nombre);
     //cin>>nombre;
     cin.get(); //ELIMINAR EL ENTER
@@ -210,12 +210,12 @@ void vabrirarch()
 
     if (Fd == NULL)
     {
-        printf("NO SE PUEDE ABRIR EL ARCHIVO");
+        printf("No se puede abrir el archivo.");
         exit(-1); //cin.get();
     }
     else
     {
-        printf("EL ARCHIVO SE ENCUENTRA ABIERTO \n");
+        printf("El archivo está abierto.\n");
     }
 }
 
@@ -233,7 +233,11 @@ int bytesarch()
     return aux;
 }
 
-// USAR SU ANALIZADOR LEXICA
+// ██      ███████ ██   ██  ██  ██████  ██████  
+// ██      ██     ██ ██  ██  ██    ██   ██ 
+// ██      █████     ███   ██  ██      ██    ██ 
+// ██      ██      ██ ██  ██  ██      ██    ██ 
+// ███████ ███████ ██   ██ ██  ██████  ██████ 
 void vanalisislexico()
 {
     char cCarent;
@@ -736,13 +740,18 @@ void vmuestra()
 {
     int iJ;
     // Se muestran los contenidos del arreglo asTokens introducidos en el analisis lexico
-    puts("\nTOKENS RECONOCIDOS : \n");
+    puts("\Tokens reconocidos:\n");
     for (iJ = 0; iJ < k; iJ++) //,Ren++)
     {
         puts(asTokens[iJ]);
     }
 }
 
+// ███████ ██ ███    ██ ████████  █████   ██████ ████████ ██  ██████  ██████  
+// ██    ██ ████   ██    ██   ██  ██ ██      ██   ██ ██    ██   ██ 
+// ███████ ██ ██ ██  ██    ██    ███████ ██         ██    ██ ██      ██    ██ 
+//    ██ ██ ██  ██ ██    ██    ██  ██ ██         ██    ██ ██      ██    ██ 
+// ███████ ██ ██   ████    ██    ██   ██  ██████   ██    ██  ██████  ██████  
 void vanalisis_sintactico()
 {
     int ip = 0, i, j;
@@ -754,11 +763,11 @@ void vanalisis_sintactico()
     else
         insertapila("D");
 
-    printf("\nSalida del Analizador Sintactico (asTokens) \n\n");
-    printf("Arreglo de Tokens : \n\n");
+    printf("\nSalida del analizador sintáctico (asTokens):\n\n");
+    printf("Arreglo de tokens:\n\n");
     for (i = 0; strcmp(asTokens[i], "$") != 0; i++)
         printf("%s ", asTokens[i]);
-    printf("\n\n Producciones : \n\n");
+    printf("\n\nProducciones:\n\n");
     do
     {
         strcpy(x, pilac[cima]);
@@ -779,7 +788,7 @@ void vanalisis_sintactico()
                 strcpy(x, pilac[cima]);
             }
         }
-        else //sino es token
+        else //si no es token
         {
             renglon = buscaTabla(a, x);
             if (renglon != 999)
@@ -816,7 +825,7 @@ void vanalisis_sintactico()
             }
             else
             {
-                printf("\n\n Error de Sintaxis ");
+                printf("\n\nError de Sintaxis.");
                 return;
             }
         }
@@ -833,7 +842,7 @@ void insertapila(string elem) // (char *elem) // (char elem[])
     else
     {
         if (cima == MAX - 1)
-            puts("Pila LLena");
+            puts("Pila llena.");
         else
         {
             cima++;
@@ -844,9 +853,9 @@ void insertapila(string elem) // (char *elem) // (char elem[])
 
 void eliminapila()
 {
-    // Comparacion para saber cantidad de la pila (si esta vacia
+    // comparacion para saber cantidad de la pila (si esta vacia
     if (cima == -1)
-        puts("Pila Vacia");
+        puts("Pila vacía.");
     else
     {
         strcpy(pilac[cima], ""); // en la cima se pone cadena vacia y se decrementa
@@ -869,16 +878,16 @@ int buscaTabla(char a[], char x[])
 {
     // se usan dos indices para representar x y a que seran comparados
     int indx = 0, inda = 0, i;
-    for (i = 0; i < 17; i++)          // El primer ciclo compara contra el arreglo token  para compara si contiene
+    for (i = 0; i < 17; i++)          // el primer ciclo compara contra el arreglo token  para compara si contiene
         if (strcmp(a, token[i]) == 0) // un identificador
             inda = i;                 // break;
     for (i = 0; i < 13; i++)
-        if (strcmp(x, varsint[i]) == 0) //Compara contra el arreglo de tablas de producciones
+        if (strcmp(x, varsint[i]) == 0) // compara contra el arreglo de tablas de producciones
             indx = i;
     for (i = 0; i < 25; i++)
     {
         if (indx == tablaM[i][0])     // si la posicion del indice x se encuentra en la matriz
-            if (inda == tablaM[i][1]) // Comparamos si el token tambien se encuentra
+            if (inda == tablaM[i][1]) // comparamos si el token tambien se encuentra
                 return i;             // se regresa el indice
     }
     return 999;
