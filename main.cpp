@@ -197,7 +197,7 @@ void vabrirarch()
     //char nombre[100];
     char *nombre = new char[100];
 
-    printf("\n\n Nombre del archivo a abrir (sin extensión): ");
+    printf("\nNombre del archivo a abrir (sin extensión): ");
     //gets(nombre);
     //cin>>nombre;
     cin.get(); //ELIMINAR EL ENTER
@@ -740,7 +740,7 @@ void vmuestra()
 {
     int iJ;
     // Se muestran los contenidos del arreglo asTokens introducidos en el analisis lexico
-    puts("\Tokens reconocidos:\n");
+    puts("\nTokens reconocidos:\n");
     for (iJ = 0; iJ < k; iJ++) //,Ren++)
     {
         puts(asTokens[iJ]);
@@ -825,7 +825,7 @@ void vanalisis_sintactico()
             }
             else
             {
-                printf("\n\nError de Sintaxis.");
+                printf("\n\nError de sintaxis.");
                 return;
             }
         }
