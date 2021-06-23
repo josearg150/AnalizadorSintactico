@@ -519,24 +519,24 @@ void vanalisislexico()
                 iniToken=indice;
                 viniedos();
                 break;//Hasta aqui jala bien
-          /* case 38: cCarent = nextchar();
+           case 38: cCarent = nextchar();
                if(cCarent == '<')
                  edoAct = 39;
                else
                  falla();
                 break;
-            case 39: cCarent = nextchar();
+            /*case 39: cCarent = nextchar();
                 if(cCarent == '=')
                   edoAct = 40;
                 else
                   edoAct = 40;
-                 break;
-            case 40: strcpy(asTokens[k++], "op.rel");
+                 break;*/
+            case 39: strcpy(asTokens[k++], "op.rel");
                 if (indice>=numBytesArch)
                  return;
                 iniToken=indice;
                 viniedos();
-                break;*/
+                break;
 
         }/*switch*/
     } /*while*/
@@ -625,11 +625,11 @@ void falla()
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;
-      /*  case 35:  edoIni=38;
+        case 35:  edoIni=38;
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;
-        case 36:  edoIni=39;
+        /*case 36:  edoIni=39;
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;
@@ -637,7 +637,7 @@ void falla()
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;*/
-        case 35: recuperaerror();
+        case 38: recuperaerror();
     }
     edoAct=edoIni;
 }
