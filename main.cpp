@@ -129,7 +129,7 @@ int main(void)
         printf("Salida del Analizador Léxico (asTokens):");
         vmuestra();
 
-        printf("Pulsa una tecla para continuar.");
+        printf("\nPulsa una tecla para continuar.");
         if (cin.get() == 0) // getch()==0)
             cin.get();      // getch();
         vanalisis_sintactico();
