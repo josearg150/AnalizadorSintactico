@@ -525,18 +525,25 @@ void vanalisislexico()
                else
                  falla();
                 break;
-            /*case 39: cCarent = nextchar();
-                if(cCarent == '=')
-                  edoAct = 40;
-                else
-                  edoAct = 40;
-                 break;*/
-            case 39: strcpy(asTokens[k++], "op.rel");
+           case 39:  cCarent = nextchar();
+            if(cCarent == '=')
+              edoAct = 40;//37?
+            else
+              edoAct = 41;
+             break;
+            case 40: strcpy(asTokens[k++], "op.rel");
                 if (indice>=numBytesArch)
                  return;
                 iniToken=indice;
                 viniedos();
                 break;
+            case 41: strcpy(asTokens[k++], "op.rel");
+                if (indice>=numBytesArch)
+                 return;
+                iniToken=indice;
+                viniedos();
+                break;
+
 
         }/*switch*/
     } /*while*/
@@ -637,7 +644,7 @@ void falla()
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;*/
-        case 38: recuperaerror();
+         case 38: recuperaerror();
     }
     edoAct=edoIni;
 }
