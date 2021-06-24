@@ -640,7 +640,7 @@ void falla()
         edoIni = 4;
         indice = iniToken;
         fseek(Fd, (long)iniToken, SEEK_SET);
-        break;
+        break;//no hay case 1
     case 4:
         edoIni = 9;
         indice = iniToken;
@@ -759,7 +759,7 @@ void vanalisis_sintactico()
     char x[10], a[10];//Arreglos de 10 porque el asTokens posee una cadena de 7 caracteres
     insertapila("$");//insertamos el simbolo final que identifica el final de la tabla
     if (strcmp(asTokens[ip], "puts") == 0) //si el elemento de asTokens en indice ip es puts, entonces insertamos f
-        insertapila("F");
+        insertapila("F");//puts no entra en en analizador lexico
     else
         insertapila("D"); //De los contrario un D
 
