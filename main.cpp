@@ -95,7 +95,7 @@ int main(void)
     {
         // puts("Generar el Archivo (s/n) : ");
 
-        cout << "¿Generar el archivo? (s/n): ";
+        cout << "Generar el archivo? (s/n): ";
         //cin>>resp;
         resp = cin.get();
 
@@ -197,7 +197,7 @@ void vabrirarch()
     //char nombre[100];
     char *nombre = new char[100];
 
-    printf("\nNombre del archivo a abrir (sin extensión): ");
+    printf("\nNombre del archivo a abrir (sin extension): ");
     //gets(nombre);
     //cin>>nombre;
     cin.get(); //ELIMINAR EL ENTER
@@ -756,36 +756,36 @@ void vanalisis_sintactico()
 {
     int ip = 0, i, j;
     int renglon, iast;
-    char x[10], a[10];
-    insertapila("$");
-    if (strcmp(asTokens[ip], "puts") == 0)
+    char x[10], a[10];//Arreglos de 10 porque el asTokens posee una cadena de 7 caracteres
+    insertapila("$");//insertamos el simbolo final que identifica el final de la tabla
+    if (strcmp(asTokens[ip], "puts") == 0) //si el elemento de asTokens en indice ip es puts, entonces insertamos f
         insertapila("F");
     else
-        insertapila("D");
+        insertapila("D"); //De los contrario un D
 
     printf("\nSalida del analizador sintáctico (asTokens):\n\n");
     printf("Arreglo de tokens:\n\n");
-    for (i = 0; strcmp(asTokens[i], "$") != 0; i++)
+    for (i = 0; strcmp(asTokens[i], "$") != 0; i++)//si la tabla no ha quedado vacia, mostramos los tokens
         printf("%s ", asTokens[i]);
     printf("\n\nProducciones:\n\n");
     do
     {
-        strcpy(x, pilac[cima]);
-        strcpy(a, asTokens[ip]);
+        strcpy(x, pilac[cima]);//Copiamos a x la cima de la pila
+        strcpy(a, asTokens[ip]);//copiamos a a el token asignado por puts (F) o D
         if (estoken(x) || (strcmp(x, "$") == 0))
         {
-            if (strcmp(x, a) == 0)
-            {
+            if (strcmp(x, a) == 0) //si x y a son iguales significa que podemos eliminar ambos ejemplo;  ID = ID a
+            {                       //Ambos se eliminan
                 eliminapila();
-                ip++;
+                ip++; //y pasasmos al siguiente indice para asTokens
             }
-            else
+            else //de lo contrario
             {
-                if (strcmp(asTokens[ip], "puts") == 0)
+                if (strcmp(asTokens[ip], "puts") == 0) //Realizamos la comprobacion anterior
                     insertapila("F");
                 else
                     insertapila("D");
-                strcpy(x, pilac[cima]);
+                strcpy(x, pilac[cima]);  // y una vez mas copiamos a x la cima de la pila
             }
         }
         else //si no es token
@@ -834,13 +834,13 @@ void vanalisis_sintactico()
 
 void insertapila(string elem) // (char *elem) // (char elem[])
 {
-    if (cima == -1)
+    if (cima == -1)// si la pila esta vacia o nula
     {
-        cima = 0;
-        strcpy(pilac[cima], elem.c_str());
+        cima = 0; // ponemos la cima en 0 (1 elemento)
+        strcpy(pilac[cima], elem.c_str());  //Y copiamos el elem a la cima
     }
     else
-    {
+    {  //Comparacion para saber si esta llena en caso contrario aumentar la cima y copiar el elem
         if (cima == MAX - 1)
             puts("Pila llena.");
         else
@@ -864,7 +864,7 @@ void eliminapila()
 }
 
 int estoken(char x[])
-{
+{   //Comparacion para saber si lo que contiene x esta en el arreglo de tokens
     int i;
     for (i = 0; i < 15; i++)
     {
