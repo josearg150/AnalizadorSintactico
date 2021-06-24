@@ -21,13 +21,13 @@ char PalRes[5][10] = {"char", "float", "int", "puts"}; //printf
 // si se usa objeto string, cambiar el uso de strcmp
 // string PalRes[10] = {"char", "float", "int", "puts"}; //printf
 
-char sLexema[127]; // arreglos para los lexemas y lineas que se utilizarán
+char sLexema[127]; // arreglos para los lexemas y lineas que se utilizaran
 char sLinea[127];
 
 //char *non = "13579", *par = "24680";
 
-char non[6] = "13579", par[6] = "24680"; //Arreglo para identificar pares y nones
-char asTokens[MAXTOKEN][10];             //Arreglo para los tokens usando la constante definida
+char non[6] = "13579", par[6] = "24680"; // Arreglo para identificar pares y nones
+char asTokens[MAXTOKEN][10];             // Arreglo para los tokens usando la constante definida
 int indice = 0, edoAct, edoIni, iniToken = 0, k, numBytesArch;
 
 int cima = -1;
@@ -48,7 +48,7 @@ void falla();
 void recuperaerror();
 int esId();
 
-void insertapila(string elem); //(char *elem);  //(char elem[]);
+void insertapila(string elem); // (char *elem);  // (char elem[]);
 int buscaTabla(char a[], char x[]);
 void eliminapila();
 int estoken(char x[]);
@@ -96,7 +96,7 @@ int main(void)
         // puts("Generar el Archivo (s/n) : ");
 
         cout << "Generar el archivo? (s/n): ";
-        //cin>>resp;
+        // cin>>resp;
         resp = cin.get();
 
         // cin.get();  //USAR CUANDO SE REQUIERA ELIMINAR EL ENTER
@@ -126,7 +126,7 @@ int main(void)
             vanalisislexico();
         fclose(Fd);
 
-        printf("Salida del Analizador Léxico (asTokens):");
+        printf("Salida del Analizador Lexico (asTokens):");
         vmuestra();
 
         printf("\nPulsa una tecla para continuar.");
@@ -150,7 +150,7 @@ void generararch()
     // cin.getline(nombre,100,'\n');
 
     string nombre;
-    printf("Nombre del archivo a generar (sin extensión): ");
+    printf("Nombre del archivo a generar (sin extension): ");
     // gets(Nombre);  // <--- ERROR CON ESTE METODO
     cin >> nombre;
 
@@ -215,7 +215,7 @@ void vabrirarch()
     }
     else
     {
-        printf("El archivo está abierto.\n");
+        printf("El archivo esta abierto.\n");
     }
 }
 
@@ -763,7 +763,7 @@ void vanalisis_sintactico()
     else
         insertapila("D"); //De los contrario un D
 
-    printf("\nSalida del analizador sintáctico (asTokens):\n\n");
+    printf("\nSalida del analizador sintactico (asTokens):\n\n");
     printf("Arreglo de tokens:\n\n");
     for (i = 0; strcmp(asTokens[i], "$") != 0; i++)//si la tabla no ha quedado vacia, mostramos los tokens
         printf("%s ", asTokens[i]);
@@ -855,7 +855,7 @@ void eliminapila()
 {
     // comparacion para saber cantidad de la pila (si esta vacia
     if (cima == -1)
-        puts("Pila vacía.");
+        puts("Pila vacia.");
     else
     {
         strcpy(pilac[cima], ""); // en la cima se pone cadena vacia y se decrementa
