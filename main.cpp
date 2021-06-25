@@ -796,7 +796,7 @@ void vanalisis_sintactico()
                 eliminapila();
                 iast = 0;
                 printf("%-3s -> ", varsint[tablaM[renglon][0]]);
-                for (j = 3; iast != 999; j++)
+                for (j = 3; iast != 999; j++)//incrementa al final de cada iteracion 
                 {
                     iast = tablaM[renglon][j]; //999
                     if (iast < 0)
