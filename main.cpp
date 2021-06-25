@@ -2,46 +2,33 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-
+#include "pila.h"
+#include "pila.cpp"
+#include "archivo.h"
+#include "archivo.cpp"
 using namespace std;
 
-// #define TRUE 1
-// #define FALSE 0
-
-// constantes
 #define MAXTOKEN 50 // límite original para hacer pruebas
 #define NUMPALRES 4
 #define MAX 50
-
-//char *PalRes[] = {"char", "float","int","puts"}; //printf
-
 char PalRes[5][10] = {"char", "float", "int", "puts"}; //printf
 // Arreglo para identificadores de variables y puts de archivo
 
-// si se usa objeto string, cambiar el uso de strcmp
-// string PalRes[10] = {"char", "float", "int", "puts"}; //printf
-
 char sLexema[127]; // arreglos para los lexemas y lineas que se utilizaran
 char sLinea[127];
-
-//char *non = "13579", *par = "24680";
 
 char non[6] = "13579", par[6] = "24680"; // Arreglo para identificar pares y nones
 char asTokens[MAXTOKEN][10];             // Arreglo para los tokens usando la constante definida
 int indice = 0, edoAct, edoIni, iniToken = 0, k, numBytesArch;
 
 int cima = -1;
-char pilac[MAX][10];
+Pila<string> *pilac = new Pila<string>(MAX);
 
-void generararch();
-void vabrirarch();
-int bytesarch();
+//char pilac[MAX][10]; Uso de clase pila propia
 
 void vanalisislexico();
 void vanalisis_sintactico();
 void viniedos();
-char nextchar();
-void vretract();
 int edoActesacept();
 void vmuestra();
 void falla();
@@ -54,8 +41,8 @@ void eliminapila();
 int estoken(char x[]);
 
 bool finarch = false;
-FILE *Fd; // puntero a un archivo file
 
+Archivo *Fd = new Archivo;
 char token[17][8] = {"x", ";", ",", "*", "id", "[", "]", "num", "char", "int", "float", "puts", "(", ")", "Cte.Lit",
                      "asign", "op.rel"};
 
@@ -90,26 +77,18 @@ int tablaM[25][8] = {{1, 8, 1, 9, 2, -1, 999, 999},
 
 int main(void)
 {
+
     char resp; // variable para la respuesta de s o no
     do         // Se entra en un ciclo
     {
-        // puts("Generar el Archivo (s/n) : ");
-
         cout << "Generar el archivo? (s/n): ";
-        // cin>>resp;
         resp = cin.get();
-
-        // cin.get();  //USAR CUANDO SE REQUIERA ELIMINAR EL ENTER
-
-        // if(resp==0)  //NULL
-        //   cin.get();
-
         if (strchr("Ss", resp))
-            generararch();
-        vabrirarch();
+            Fd->generararch();
+        Fd->vabrirarch();
         // se guarda el tamaño de kb o bytes del archivo para saber si contiene texto
 
-        numBytesArch = bytesarch();
+        numBytesArch = Fd->bytesarch();
 
         if (numBytesArch == 0)
         {
@@ -120,11 +99,10 @@ int main(void)
                 exit(-1);
             }
         }
-        // fclose(Fd);
 
         else
             vanalisislexico();
-        fclose(Fd);
+        Fd->cerrararch();
 
         printf("Salida del Analizador Lexico (asTokens):");
         vmuestra();
@@ -139,98 +117,6 @@ int main(void)
     } while (strchr("Ss", resp));
 
     return 0;
-}
-
-void generararch()
-{
-    char car;          // variable para lectura del archivo
-    char nomArch[100]; // nombre para archivo de maximo 100 caracteres
-
-    // char *nombre = new char[100];
-    // cin.getline(nombre,100,'\n');
-
-    string nombre;
-    printf("Nombre del archivo a generar (sin extension): ");
-    // gets(Nombre);  // <--- ERROR CON ESTE METODO
-    cin >> nombre;
-
-    // cin.get();    // ELIMINAR ENTER
-
-    sprintf(nomArch, "%s.dat", nombre.c_str()); // se concatena el nombre del archivo en el arreglo
-    Fd = fopen(nomArch, "w+b");                 // se dan permisos de escritura "write " y para escribir en binario
-    if (Fd == NULL)
-    {
-        cout << "No se puede abrir el archivo." << nomArch;
-        exit(-1);
-    }
-    // imprime en consola la entrada del usuario
-
-    puts("Teclea el nombre del archivo: ");
-    // cin.get();  // eliminar el enter
-    // printf("Teclea <ESC> -USAR UNICODE DEL ESC -para terminar el archivo \n");
-
-    printf("Teclea @ para terminar el archivo \n");
-
-    //LA INFO ESTA EN EL BUFFER
-    do
-    {
-        car = cin.get();
-        // cin>>car;
-        if (car == '\n') //13)
-        {
-            car = '\n';
-            printf("\n");
-        }
-        if (car == 0) //NULL
-            car = cin.get();
-        if (car != '@') //27 && car != 8)
-            fwrite(&car, sizeof(car), 1, Fd);
-
-    } while (car != '@');
-
-    fclose(Fd);
-}
-
-void vabrirarch()
-{
-    char nomArch[100];
-    //char nombre[100];
-    char *nombre = new char[100];
-
-    printf("\nNombre del archivo a abrir (sin extension): ");
-    //gets(nombre);
-    //cin>>nombre;
-    cin.get(); //ELIMINAR EL ENTER
-    cin.getline(nombre, 100, '\n');
-
-    //sprintf(nomArch,"/Users/martinos/Desktop/appASintactico_XCode/%s.dat",nombre);  //,'\0');
-    sprintf(nomArch, "%s.dat", nombre); //,'\0');
-
-    Fd = fopen(nomArch, "r+b");
-
-    if (Fd == NULL)
-    {
-        printf("No se puede abrir el archivo.");
-        exit(-1); //cin.get();
-    }
-    else
-    {
-        printf("El archivo esta abierto.\n");
-    }
-}
-
-int bytesarch()
-{
-    // Metodo para saber si el archivo contiene datos
-    int aux;
-    // Abrimos el archivo desde la posicion requerida
-    //   archivo, , posicion respecto al final del archivo
-    fseek(Fd, 0L, SEEK_END);
-    // auxiliar retorna la posicion del indicador
-    aux = (int)ftell(Fd);
-    //   archivo, posicion 0, a partir del inicio del archivo
-    fseek(Fd, 0L, SEEK_SET);
-    return aux;
 }
 
 //
@@ -248,7 +134,7 @@ void vanalisislexico()
         switch (edoAct)
         {
         case 0:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(non, cCarent))
                 edoAct = 1;
             else if (strchr(par, cCarent))
@@ -257,7 +143,7 @@ void vanalisislexico()
                 falla();
             break;
         case 1:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(non, cCarent))
                 edoAct = 1;
             else if (strchr(par, cCarent))
@@ -266,7 +152,7 @@ void vanalisislexico()
                 falla();
             break;
         case 2:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(non, cCarent))
                 edoAct = 1;
             else if (strchr(par, cCarent))
@@ -275,7 +161,7 @@ void vanalisislexico()
                 edoAct = 3;
             break;
         case 3:
-            vretract();
+            Fd->vretract(indice);
             strcpy(asTokens[k++], "num"); //Estaba en mayusucula
             if (indice >= numBytesArch)
                 return;
@@ -283,7 +169,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 4:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             switch (cCarent)
             {
             case '+':
@@ -332,7 +218,7 @@ void vanalisislexico()
             break;
             //. OTRA VEZ NON - PAR
         case 9:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(par, cCarent))
                 edoAct = 10;
             else if (strchr(non, cCarent))
@@ -341,7 +227,7 @@ void vanalisislexico()
                 falla();
             break;
         case 10:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(par, cCarent))
                 edoAct = 10;
             else if (strchr(non, cCarent))
@@ -350,7 +236,7 @@ void vanalisislexico()
                 falla();
             break;
         case 11:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (strchr(non, cCarent))
                 edoAct = 11;
             else if (strchr(par, cCarent))
@@ -360,7 +246,7 @@ void vanalisislexico()
             break;
             // NON - PAR
         case 12:
-            vretract();
+            Fd->vretract(indice);
             strcpy(asTokens[k++], "num");
             if (indice >= numBytesArch)
                 return;
@@ -368,21 +254,21 @@ void vanalisislexico()
             viniedos();
             break;
         case 13:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if ((isalpha(cCarent) || cCarent == '_'))
                 edoAct = 14;
             else
                 falla();
             break;
         case 14:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if ((isalpha(cCarent) || cCarent == '_') || isdigit(cCarent))
                 edoAct = 14;
             else
                 edoAct = 15;
             break;
         case 15:
-            vretract();
+            Fd->vretract(indice);
             if (esId())
                 strcpy(asTokens[k++], "id"); // Estaba escrito diferente al arreglo
             else
@@ -394,7 +280,7 @@ void vanalisislexico()
             break;
             // <<<-- en este case
         case 16:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == ';')
                 edoAct = 17;
             else
@@ -412,7 +298,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 18:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '[')
                 edoAct = 19;
             else
@@ -426,7 +312,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 20:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == ']')
                 edoAct = 21;
             else
@@ -440,7 +326,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 22:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == ',')
                 edoAct = 23;
             else
@@ -454,14 +340,14 @@ void vanalisislexico()
             viniedos();
             break;
         case 24:
-            cCarent = nextchar(); // funcion que lee el siguiente caracter
+            cCarent = Fd->nextchar(indice); // funcion que lee el siguiente caracter
             if (('"' == cCarent) && cCarent)
                 edoAct = 25;
             else
                 falla();
             break;
         case 25:
-            cCarent = nextchar(); // funcion que lee el siguiente caracter
+            cCarent = Fd->nextchar(indice); // funcion que lee el siguiente caracter
             if (('"' != cCarent) && cCarent)
                 edoAct = 25;
             else if (cCarent)
@@ -475,7 +361,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 27:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '(')
                 edoAct = 28;
             else
@@ -489,7 +375,7 @@ void vanalisislexico()
             viniedos();
             break;
         case 29:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == ')')
                 edoAct = 30;
             else
@@ -503,14 +389,14 @@ void vanalisislexico()
             viniedos();
             break;
         case 31:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
                 edoAct = 32;
             else
                 falla();
             break;
         case 32:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
                 edoAct = 34;
             else
@@ -531,14 +417,14 @@ void vanalisislexico()
             viniedos();
             break;
         case 35:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '!')
                 edoAct = 36;
             else
                 falla();
             break;
         case 36:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
                 edoAct = 37;
             else
@@ -552,14 +438,14 @@ void vanalisislexico()
             viniedos();
             break; //Hasta aqui jala bien
         case 38:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '<' || cCarent == '>')
                 edoAct = 39;
             else
                 falla();
             break;
         case 39:
-            cCarent = nextchar();
+            cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
                 edoAct = 40; //37?
             else
@@ -588,20 +474,6 @@ void viniedos()
     //variable inicar estados
     edoAct = 0;
     edoIni = 0;
-}
-
-char nextchar()
-{
-    char cAux;
-    fread(&cAux, sizeof(cAux), 1, Fd);
-    indice++;
-    return cAux;
-}
-
-void vretract()
-{
-    indice--;
-    fseek(Fd, (long)indice, SEEK_SET);
 }
 
 int edoActesacept()
@@ -639,67 +511,67 @@ void falla()
     case 0:
         edoIni = 4;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;//no hay case 1
     case 4:
         edoIni = 9;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 9:
         edoIni = 13;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 13:
         edoIni = 16;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 16:
         edoIni = 18;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 18:
         edoIni = 20;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 20:
         edoIni = 22;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 22:
         edoIni = 24;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 24:
         edoIni = 27;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 27:
         edoIni = 29;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 29:
         edoIni = 31;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 31:
         edoIni = 35;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 35:
         edoIni = 38;
         indice = iniToken;
-        fseek(Fd, (long)iniToken, SEEK_SET);
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
         /*case 36:  edoIni=39;
             indice = iniToken;
@@ -724,9 +596,9 @@ void recuperaerror()
 int esId()
 {
     int n, m, found = false;
-    fseek(Fd, (long)iniToken, SEEK_SET);
+    fseek(Fd->Fd, (long)iniToken, SEEK_SET);
     for (m = iniToken, n = 0; m < indice; m++, n++)
-        fread(&sLexema[n], sizeof(char), 1, Fd);
+        fread(&sLexema[n], sizeof(char), 1, Fd->Fd);
     sLexema[n] = '\0';
     for (m = 0; m < NUMPALRES && !found;)
         if (strcmp(PalRes[m], sLexema) == 0)
@@ -754,14 +626,15 @@ void vmuestra()
 // 
 void vanalisis_sintactico()
 {
+
     int ip = 0, i, j;
     int renglon, iast;
     char x[10], a[10];//Arreglos de 10 porque el asTokens posee una cadena de 7 caracteres
-    insertapila("$");//insertamos el simbolo final que identifica el final de la tabla
+    pilac->push("$");
     if (strcmp(asTokens[ip], "puts") == 0) //si el elemento de asTokens en indice ip es puts, entonces insertamos f
-        insertapila("F");//puts no entra en en analizador lexico
+        pilac->push("F");
     else
-        insertapila("D"); //De los contrario un D
+        pilac->push("D");
 
     printf("\nSalida del analizador sintactico (asTokens):\n\n");
     printf("Arreglo de tokens:\n\n");
@@ -770,22 +643,24 @@ void vanalisis_sintactico()
     printf("\n\nProducciones:\n\n");
     do
     {
-        strcpy(x, pilac[cima]);//Copiamos a x la cima de la pila
+        strcpy(x,pilac->Tope().c_str());
         strcpy(a, asTokens[ip]);//copiamos a a el token asignado por puts (F) o D
         if (estoken(x) || (strcmp(x, "$") == 0))
         {
             if (strcmp(x, a) == 0) //si x y a son iguales significa que podemos eliminar ambos ejemplo;  ID = ID a
             {                       //Ambos se eliminan
-                eliminapila();
+                //eliminapila();
+                pilac->pop();
                 ip++; //y pasasmos al siguiente indice para asTokens
             }
             else //de lo contrario
             {
                 if (strcmp(asTokens[ip], "puts") == 0) //Realizamos la comprobacion anterior
-                    insertapila("F");
+                    pilac->push("F");
                 else
-                    insertapila("D");
-                strcpy(x, pilac[cima]);  // y una vez mas copiamos a x la cima de la pila
+                    pilac->push("D");
+
+                strcpy(x,pilac->Tope().c_str());
             }
         }
         else //si no es token
@@ -793,7 +668,7 @@ void vanalisis_sintactico()
             renglon = buscaTabla(a, x);
             if (renglon != 999)
             {
-                eliminapila();
+                pilac->pop();
                 iast = 0;
                 printf("%-3s -> ", varsint[tablaM[renglon][0]]);
                 for (j = 3; iast != 999; j++)//incrementa al final de cada iteracion 
@@ -817,10 +692,10 @@ void vanalisis_sintactico()
                     if (iast < 0)
                     {
                         iast *= -1;
-                        insertapila(token[iast]);
+                        pilac->push(token[iast]);
                     }
                     else
-                        insertapila(varsint[iast]);
+                        pilac->push(varsint[iast]);
                 }
             }
             else
@@ -830,37 +705,6 @@ void vanalisis_sintactico()
             }
         }
     } while (strcmp(x, "$") != 0);
-}
-
-void insertapila(string elem) // (char *elem) // (char elem[])
-{
-    if (cima == -1)// si la pila esta vacia o nula
-    {
-        cima = 0; // ponemos la cima en 0 (1 elemento)
-        strcpy(pilac[cima], elem.c_str());  //Y copiamos el elem a la cima
-    }
-    else
-    {  //Comparacion para saber si esta llena en caso contrario aumentar la cima y copiar el elem
-        if (cima == MAX - 1)
-            puts("Pila llena.");
-        else
-        {
-            cima++;
-            strcpy(pilac[cima], elem.c_str());
-        } // pilac[cima+1][0]='\0';
-    }
-}
-
-void eliminapila()
-{
-    // comparacion para saber cantidad de la pila (si esta vacia
-    if (cima == -1)
-        puts("Pila vacia.");
-    else
-    {
-        strcpy(pilac[cima], ""); // en la cima se pone cadena vacia y se decrementa
-        cima--;                  // elimninar cuando x = a
-    }
 }
 
 int estoken(char x[])

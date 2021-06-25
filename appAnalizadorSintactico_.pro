@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
+    archivo.cpp \
     pila.cpp
 
 HEADERS += \
+    archivo.h \
     pila.h
