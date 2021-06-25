@@ -179,7 +179,7 @@ void generararch()
         if (car == '\n') //13)
         {
             car = '\n';
-            printf("\n");
+            //printf("\n");
         }
         if (car == 0) //NULL
             car = cin.get();
