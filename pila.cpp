@@ -3,7 +3,6 @@ template<class T>
 Pila<T>::Pila(int n)
 {
             tam = n;
-
             vec = new T[tam];
             tope = 0;
             vacia = true;

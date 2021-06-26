@@ -1,9 +1,7 @@
 #include "analisissintactico.h"
+#include "pila.h"
+#include "pila.cpp"
 
-AnalisisSintactico::AnalisisSintactico()
-{
-
-}
 
 AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 {
