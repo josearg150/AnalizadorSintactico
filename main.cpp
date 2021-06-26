@@ -11,7 +11,7 @@
 
 using namespace std;
 
-#define MAX 50
+#define MAX 30
 
 int numBytesArch;
 char **asTkns;
@@ -25,8 +25,9 @@ int main(void)
     Fd = new Archivo();
     Pila<string> *pilac = new Pila<string>(MAX);
     asTkns = new char *[10];
-    for(int i = 0; i <50; i++)
+    for(int i = 0; i <MAX; i++){
         asTkns[i] = new char[10];
+    }
     al = new AnalisisLexico(Fd, asTkns);
     as = new AnalisisSintactico(asTkns, pilac);
 

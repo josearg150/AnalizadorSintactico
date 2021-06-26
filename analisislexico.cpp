@@ -6,16 +6,8 @@ AnalisisLexico::AnalisisLexico()
 }
 
 AnalisisLexico::AnalisisLexico( Archivo *F, char **asTkns){
-    //for(int i = 0; i < 10; i++)
-      // asTokens[i] = new char[10];
     asTokens = asTkns;
     Fd = F;
-}
-
-void AnalisisLexico::iniciaArreglo()
-{
-    //for(int i = 0; i < 10; i++)
-       //asTokens[i] = new char[10];
 }
 
 int AnalisisLexico::edoActesacept()

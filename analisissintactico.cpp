@@ -5,8 +5,6 @@
 
 AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 {
-    //for(int i = 0; i < 10; i++)
-       //asTokens[i] = new char[10];
     asTokens = asTkns;
     pilac = pila;
 }
@@ -97,13 +95,13 @@ int AnalisisSintactico::buscaTabla(char a[], char x[])
 {
     // se usan dos indices para representar x y a que seran comparados
     int indx = 0, inda = 0, i;
-    for (i = 0; i < 17; i++)          // el primer ciclo compara contra el arreglo token  para compara si contiene
+    for (i = 0; i < numTokens; i++)          // el primer ciclo compara contra el arreglo token  para compara si contiene
         if (strcmp(a, token[i]) == 0) // un identificador
             inda = i;                 // break;
     for (i = 0; i < 13; i++)
         if (strcmp(x, varsint[i]) == 0) // compara contra el arreglo de tablas de producciones
             indx = i;
-    for (i = 0; i < 25; i++)
+    for (i = 0; i < renM; i++)
     {
         if (indx == tablaM[i][0])     // si la posicion del indice x se encuentra en la matriz
             if (inda == tablaM[i][1]) // comparamos si el token tambien se encuentra
@@ -115,7 +113,7 @@ int AnalisisSintactico::buscaTabla(char a[], char x[])
 int AnalisisSintactico::estoken(char x[])
 {
     int i;
-    for (i = 0; i < 15; i++)
+    for (i = 0; i < numTokens; i++)
     {
         if (strcmp(x, token[i]) == 0)
             return 1;

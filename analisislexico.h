@@ -9,7 +9,6 @@ class AnalisisLexico
 public:
     AnalisisLexico();
     AnalisisLexico(Archivo *F, char **asTkns);
-    void iniciaArreglo();
     void vanalisislexico(int );
     void viniedos();
     int edoActesacept();
