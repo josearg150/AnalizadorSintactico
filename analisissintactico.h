@@ -6,6 +6,8 @@ class AnalisisSintactico
 {
 public:
     AnalisisSintactico();
+
+private:
 };
 
 #endif // ANALISISSINTACTICO_H

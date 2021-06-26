@@ -6,6 +6,7 @@
 #include "pila.cpp"
 #include "archivo.h"
 #include "archivo.cpp"
+
 using namespace std;
 
 #define MAXTOKEN 50 // límite original para hacer pruebas
@@ -23,7 +24,6 @@ int indice = 0, edoAct, edoIni, iniToken = 0, k, numBytesArch;
 
 int cima = -1;
 Pila<string> *pilac = new Pila<string>(MAX);
-
 //char pilac[MAX][10]; Uso de clase pila propia
 
 void vanalisislexico();
