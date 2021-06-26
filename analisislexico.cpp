@@ -486,3 +486,10 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
         } /*switch*/
     }     /*while*/
 }
+
+void AnalisisLexico::viniedos()
+{
+    //variable inicar estados
+    edoAct = 0;
+    edoIni = 0;
+}
