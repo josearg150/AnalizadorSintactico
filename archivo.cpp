@@ -57,6 +57,7 @@ void Archivo::vabrirarch()
         cin.getline(nombre, 100, '\n');
         sprintf(nomArch, "%s.dat", nombre); //,'\0');
 
+        //Fd = NULL;
         Fd = fopen(nomArch, "r+b");
 
         if (Fd == NULL)
@@ -68,7 +69,7 @@ void Archivo::vabrirarch()
         {
             printf("El archivo esta abierto.\n");
         }
-
+   // fclose(Fd);
 }
 
 int Archivo::bytesarch()

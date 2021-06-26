@@ -8,19 +8,21 @@ class AnalisisLexico
 {
 public:
     AnalisisLexico();
-    AnalisisLexico(Archivo *F, char *asTkns[10]);
+    AnalisisLexico(Archivo *F, char **asTkns);
+    void iniciaArreglo();
     void vanalisislexico(int );
     void viniedos();
     int edoActesacept();
     void falla();
     void recuperaerror();
     int esId();
+    int k;
 private:
     int edoAct;
     int edoIni;
-    int indice;
-    int iniToken;
-    int k;
+    int indice = 0;
+    int iniToken = 0;
+
 
     Archivo *Fd;
     char PalRes[5][10] = {"char", "float", "int", "puts"}; //printf

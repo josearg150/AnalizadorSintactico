@@ -44,11 +44,12 @@ int estoken(char x[]);
 
 bool finarch = false;
 
-char *asTkns[10];
+//char asTkns[50][10];
+char **asTkns;
 
 Archivo *Fd = new Archivo();
-AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);
-AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
+AnalisisLexico *al;
+AnalisisSintactico *as;
 
 
 char token[17][8] = {"x", ";", ",", "*", "id", "[", "]", "num", "char", "int", "float", "puts", "(", ")", "Cte.Lit",
@@ -86,6 +87,11 @@ int tablaM[25][8]= {{1, 8 , 1, 9, 2, -1, 999,999},  //D->TL;       8=char
 
 int main(void)
 {
+    asTkns = new char *[10];
+    for(int i = 0; i <50; i++)
+        asTkns[i] = new char[10];
+   al = new AnalisisLexico(Fd, asTkns);
+   as = new AnalisisSintactico(asTkns, pilac);
 
     char resp; // variable para la respuesta de s o no
     do         // Se entra en un ciclo
@@ -98,6 +104,7 @@ int main(void)
         // se guarda el tamaño de kb o bytes del archivo para saber si contiene texto
 
         numBytesArch = Fd->bytesarch();
+        //cout << numBytesArch;
 
         if (numBytesArch == 0)
         {
@@ -111,7 +118,7 @@ int main(void)
 
         else
             al->vanalisislexico(numBytesArch);//vanalisislexico();
-        Fd->cerrararch();
+        //Fd->cerrararch();
 
         printf("Salida del Analizador Lexico (asTokens):");
         vmuestra();
@@ -622,9 +629,9 @@ void vmuestra()
     int iJ;
     // Se muestran los contenidos del arreglo asTokens introducidos en el analisis lexico
     puts("\nTokens reconocidos:\n");
-    for (iJ = 0; iJ < k; iJ++) //,Ren++)
+    for (iJ = 0; iJ < al->k; iJ++) //,Ren++)
     {
-        puts(asTokens[iJ]);
+        puts(asTkns[iJ]);
     }
 }
 

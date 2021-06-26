@@ -5,8 +5,10 @@ AnalisisSintactico::AnalisisSintactico()
 
 }
 
-AnalisisSintactico::AnalisisSintactico(char *asTkns[], Pila<string> *pila)
+AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 {
+    //for(int i = 0; i < 10; i++)
+       //asTokens[i] = new char[10];
     asTokens = asTkns;
     pilac = pila;
 }

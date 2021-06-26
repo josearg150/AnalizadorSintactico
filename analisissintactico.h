@@ -11,7 +11,7 @@ class AnalisisSintactico
 {
 public:
     AnalisisSintactico();
-    AnalisisSintactico(char *asTkns[10], Pila<string> *pila);
+    AnalisisSintactico(char **asTkns, Pila<string> *pila);
     void vanalisis_sintactico();
     int buscaTabla(char a[], char x[]);
     int estoken(char x[]);
