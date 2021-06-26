@@ -5,6 +5,10 @@ AnalisisLexico::AnalisisLexico()
 
 }
 
+AnalisisLexico::AnalisisLexico( Archivo *F, char *asTkns[]){
+    asTokens = asTkns;
+    Fd = F;
+}
 
 int AnalisisLexico::edoActesacept()
 {
@@ -123,7 +127,22 @@ void AnalisisLexico::recuperaerror()
     viniedos();
 }
 
-void AnalisisLexico::vanalisislexico(int &numBytesArch)
+int AnalisisLexico::esId()
+{
+    int n, m, found = false;
+    fseek(Fd->Fd, (long)iniToken, SEEK_SET);
+    for (m = iniToken, n = 0; m < indice; m++, n++)
+        fread(&sLexema[n], sizeof(char), 1, Fd->Fd);
+    sLexema[n] = '\0';
+    for (m = 0; m < NUMPALRES && !found;)
+        if (strcmp(PalRes[m], sLexema) == 0)
+            found = true;
+        else
+            m++;
+    return (found ? 0 : 1);
+}
+
+void AnalisisLexico::vanalisislexico(int numBytesArch)
 {
     char cCarent;
     indice = iniToken = k = 0;

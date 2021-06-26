@@ -6,6 +6,8 @@
 #include "pila.cpp"
 #include "archivo.h"
 #include "archivo.cpp"
+#include "analisislexico.h"
+#include "analisissintactico.h"
 
 using namespace std;
 
@@ -42,7 +44,13 @@ int estoken(char x[]);
 
 bool finarch = false;
 
-Archivo *Fd = new Archivo;
+char *asTkns[10];
+
+Archivo *Fd = new Archivo();
+AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);
+AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
+
+
 char token[17][8] = {"x", ";", ",", "*", "id", "[", "]", "num", "char", "int", "float", "puts", "(", ")", "Cte.Lit",
                      "asign", "op.rel"};
 
@@ -102,7 +110,7 @@ int main(void)
         }
 
         else
-            vanalisislexico();
+            al->vanalisislexico(numBytesArch);//vanalisislexico();
         Fd->cerrararch();
 
         printf("Salida del Analizador Lexico (asTokens):");
@@ -111,7 +119,7 @@ int main(void)
         printf("\nPulsa una tecla para continuar.");
         if (cin.get() == 0) // getch()==0)
             cin.get();      // getch();
-        vanalisis_sintactico();
+        as->vanalisis_sintactico();//vanalisis_sintactico();
         cin.get();
         printf("Presiona (sS) para continuar: ");
         cin >> resp;
