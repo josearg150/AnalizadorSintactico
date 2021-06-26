@@ -440,7 +440,7 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
                 edoAct = 33;
             break;
         case 33:
-            strcpy(asTokens[k++], "asign");
+            strcpy(asTokens[k++], "=");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
