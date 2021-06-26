@@ -24,14 +24,14 @@ char non[6] = "13579", par[6] = "24680"; // Arreglo para identificar pares y non
 char asTokens[MAXTOKEN][10];             // Arreglo para los tokens usando la constante definida
 int indice = 0, edoAct, edoIni, iniToken = 0, k, numBytesArch;
 
-Pila<string> *pilac = new Pila<string>(MAX);
+Pila<string> *pilac;
 //char pilac[MAX][10]; Uso de clase pila propia
 
 
-//void vanalisis_sintactico();
+void vanalisis_sintactico();
 void vmuestra();
-//int buscaTabla(char a[], char x[]);
-//int estoken(char x[]);
+int buscaTabla(char a[], char x[]);
+int estoken(char x[]);
 
 bool finarch = false;
 
@@ -78,6 +78,7 @@ int tablaM[25][8]= {{1, 8 , 1, 9, 2, -1, 999,999},  //D->TL;       8=char
 
 int main(void)
 {
+    pilac = new Pila<string>(MAX);
     asTkns = new char *[10];
     for(int i = 0; i <50; i++)
         asTkns[i] = new char[10];
@@ -142,7 +143,7 @@ void vmuestra()
 //      SINTÁCTICO
 //
 // 
-/*
+
 void vanalisis_sintactico()
 {
 
@@ -254,4 +255,4 @@ int buscaTabla(char a[], char x[])
                 return i;             // se regresa el indice
     }
     return 999;
-}*/
+}
