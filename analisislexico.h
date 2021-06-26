@@ -15,6 +15,7 @@ public:
     int edoActesacept();
     void falla();
     void recuperaerror();
+    void vmuestra();
     int esId();
     int k;
 private:

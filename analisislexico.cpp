@@ -135,6 +135,17 @@ void AnalisisLexico::recuperaerror()
     viniedos();
 }
 
+void AnalisisLexico::vmuestra()
+{
+    int iJ;
+    // Se muestran los contenidos del arreglo asTokens introducidos en el analisis lexico
+    puts("\nTokens reconocidos:\n");
+    for (iJ = 0; iJ < k; iJ++) //,Ren++)
+    {
+        puts(asTokens[iJ]);
+    }
+}
+
 int AnalisisLexico::esId()
 {
     int n, m, found = false;

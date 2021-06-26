@@ -21,7 +21,6 @@ void Archivo::generararch()
         cout << "No se puede abrir el archivo." << nomArch;
         exit(-1);
     }
-    // imprime en consola la entrada del usuario
 
     puts("Teclea el nombre del archivo: ");
 
@@ -35,7 +34,6 @@ void Archivo::generararch()
         if (car == '\n') //13)
         {
             car = '\n';
-            printf("\n");
         }
         if (car == 0) //NULL
             car = cin.get();
