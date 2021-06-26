@@ -11,7 +11,7 @@
 
 using namespace std;
 
-#define MAX 30
+#define MAX 50
 
 int numBytesArch;
 char **asTkns;
@@ -24,7 +24,7 @@ int main(void)
 {
     Fd = new Archivo();
     Pila<string> *pilac = new Pila<string>(MAX);
-    asTkns = new char *[10];
+    asTkns = new char *[MAX];
     for(int i = 0; i <MAX; i++){
         asTkns[i] = new char[10];
     }
