@@ -64,7 +64,8 @@ int main(void)
         as->vanalisis_sintactico();
         cin.get();
         printf("Presiona (sS) para continuar: ");
-        cin >> resp;
+        resp = cin.get();
+        cin.get();
     } while (strchr("Ss", resp));
 
     return 0;
