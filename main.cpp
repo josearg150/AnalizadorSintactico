@@ -8,6 +8,8 @@
 #include "archivo.cpp"
 #include "analisislexico.h"
 #include "analisissintactico.h"
+#include "mainwindow.h"
+#include <QApplication>
 
 using namespace std;
 
@@ -20,8 +22,12 @@ Archivo *Fd;
 AnalisisLexico *al;
 AnalisisSintactico *as;
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+	/*
     Fd = new Archivo();
     Pila<string> *pilac = new Pila<string>(MAX);
     asTkns = new char *[MAX];
@@ -67,6 +73,6 @@ int main(void)
         resp = cin.get();
         cin.get();
     } while (strchr("Ss", resp));
-
-    return 0;
+	*/
+    return a.exec();
 }
