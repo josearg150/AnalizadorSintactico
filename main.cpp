@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
@@ -7,13 +7,13 @@
 #include "archivo.h"
 #include "archivo.cpp"
 #include "analisislexico.h"
-#include "analisissintactico.h"
+#include "analisissintactico.h"*/
 #include "mainwindow.h"
 #include <QApplication>
 
 using namespace std;
 
-#define MAX 50
+/*#define MAX 50
 
 int numBytesArch;
 char **asTkns;
@@ -21,11 +21,12 @@ char **asTkns;
 Archivo *Fd;
 AnalisisLexico *al;
 AnalisisSintactico *as;
-
+*/
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
     MainWindow w;
+    w.setWindowIcon(QIcon("icon.png"));
     w.show();
 	/*
     Fd = new Archivo();
