@@ -162,8 +162,10 @@ int AnalisisLexico::esId()
         fread(&sLexema[n], sizeof(char), 1, Fd->Fd);
     sLexema[n] = '\0';
     for (m = 0; m < NUMPALRES && !found;)
-        if (strcmp(PalRes[m], sLexema) == 0)
+        if (strcmp(PalRes[m], sLexema) == 0){
             found = true;
+            break;
+        }
         else
             m++;
     return (found ? 0 : 1);

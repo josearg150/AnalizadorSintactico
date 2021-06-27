@@ -97,10 +97,16 @@ int AnalisisSintactico::buscaTabla(char a[], char x[])
     int indx = 0, inda = 0, i;
     for (i = 0; i < numTokens; i++)          // el primer ciclo compara contra el arreglo token  para compara si contiene
         if (strcmp(a, token[i]) == 0) // un identificador
-            inda = i;                 // break;
+        {
+            inda = i;
+            break;
+        }
     for (i = 0; i < 13; i++)
         if (strcmp(x, varsint[i]) == 0) // compara contra el arreglo de tablas de producciones
+        {
             indx = i;
+            break;
+        }
     for (i = 0; i < renM; i++)
     {
         if (indx == tablaM[i][0])     // si la posicion del indice x se encuentra en la matriz
