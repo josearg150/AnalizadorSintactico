@@ -35,6 +35,8 @@ int AnalisisLexico::edoActesacept()
     case 39:
     case 42:
     case 43:
+    case 45:
+    case 47:
         return true;
     default:
         return false;
@@ -110,20 +112,27 @@ void AnalisisLexico::falla()
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-        /*case 36:  edoIni=39;
-            indice = iniToken;
-            fseek(Fd, (long)iniToken, SEEK_SET);
-            break;
-        case 38:  edoIni=41;
-            indice = iniToken;
-            fseek(Fd, (long)iniToken, SEEK_SET);
-            break;*/
     case 36:
         edoIni = 40;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 40: recuperaerror();
+    case 40:
+        edoIni = 44;
+        indice = iniToken;
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
+        break;
+    case 44:
+        edoIni = 46;
+        indice = iniToken;
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
+        break;
+    /*case 46:
+        edoIni = 48;
+        indice = iniToken;
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
+        break;*/
+    case 46:recuperaerror();
     }
     edoAct = edoIni;
 }
@@ -497,6 +506,34 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             break;
         case 43:
             strcpy(asTokens[k++], ">");
+            if (indice >= numBytesArch)
+                return;
+            iniToken = indice;
+            viniedos();
+            break;
+        case 44:
+            cCarent = Fd->nextchar(indice);
+            if (cCarent == '{')
+                edoAct = 45;
+            else
+                falla();
+            break;
+        case 45:
+            strcpy(asTokens[k++], "{");
+            if (indice >= numBytesArch)
+                return;
+            iniToken = indice;
+            viniedos();
+            break;
+        case 46:
+            cCarent = Fd->nextchar(indice);
+            if (cCarent == '}')
+                edoAct = 47;
+            else
+                falla();
+            break;
+        case 47:
+            strcpy(asTokens[k++], "}");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
