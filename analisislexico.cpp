@@ -189,9 +189,12 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             cCarent = Fd->nextchar(indice);
              if(isdigit(cCarent))
                 edoAct = 1;
-            else
+                else if(cCarent == '.')
+                    edoAct = 3;
+             else
                  edoAct = 2;
             break;
+
         case 2:
             Fd->vretract(indice);
             strcpy(asTokens[k++], "num"); //Estaba en mayusucula
