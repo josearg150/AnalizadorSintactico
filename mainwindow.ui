@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>799</width>
+    <width>800</width>
     <height>460</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>799</width>
+     <width>800</width>
      <height>20</height>
     </rect>
    </property>
@@ -56,11 +56,6 @@
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
-   </property>
-  </action>
-  <action name="actionInformaci_n">
-   <property name="text">
-    <string>Información</string>
    </property>
   </action>
   <action name="actionAyuda">

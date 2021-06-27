@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "generararchivo.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +19,12 @@ public:
 private slots:
     void on_actionSalir_triggered();
 
+    void on_actionAbrir_triggered();
+
+    void on_actionGenerar_triggered();
+
 private:
     Ui::MainWindow *ui;
+    generarArchivo *genVentana;
 };
 #endif // MAINWINDOW_H
