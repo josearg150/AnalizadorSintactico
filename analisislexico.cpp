@@ -14,24 +14,27 @@ int AnalisisLexico::edoActesacept()
 {
     switch (edoAct)
     {
-    case 8:
+    case 2:
+    case 4:
     case 5:
-    case 7:
     case 6:
-    case 3:
-    case 12:
+    case 7:
+    case 10:
+    case 13:
     case 15:
     case 17:
     case 19:
     case 21:
-    case 23:
+    case 24:
     case 26:
     case 28:
-    case 30:
-    case 33:
-    case 34:
-    case 37:
-    case 40:
+    case 31:
+    case 32:
+    case 35:
+    case 38:
+    case 39:
+    case 42:
+    case 43:
         return true;
     default:
         return false;
@@ -53,57 +56,57 @@ void AnalisisLexico::falla()
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
     case 8:
-        edoIni = 12;
+        edoIni = 11;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 12:
-        edoIni = 15;
+    case 11:
+        edoIni = 14;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 15:
-        edoIni = 17;
+    case 14:
+        edoIni = 16;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 17:
-        edoIni = 19;
+    case 16:
+        edoIni = 18;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 19:
-        edoIni = 21;
+    case 18:
+        edoIni = 20;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 21:
-        edoIni = 23;
+    case 20:
+        edoIni = 22;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 23:
-        edoIni = 26;
+    case 22:
+        edoIni = 25;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 26:
-        edoIni = 28;
+    case 25:
+        edoIni = 27;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 28:
-        edoIni = 30;
+    case 27:
+        edoIni = 29;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 30:
-        edoIni = 34;
+    case 29:
+        edoIni = 33;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
-    case 34:
-        edoIni = 37;
+    case 33:
+        edoIni = 36;
         indice = iniToken;
         fseek(Fd->Fd, (long)iniToken, SEEK_SET);
         break;
@@ -115,8 +118,12 @@ void AnalisisLexico::falla()
             indice = iniToken;
             fseek(Fd, (long)iniToken, SEEK_SET);
             break;*/
-    case 37:
-        recuperaerror();
+    case 36:
+        edoIni = 40;
+        indice = iniToken;
+        fseek(Fd->Fd, (long)iniToken, SEEK_SET);
+        break;
+    case 40: recuperaerror();
     }
     edoAct = edoIni;
 }
@@ -235,33 +242,19 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             //. OTRA VEZ NON - PAR
         case 8:
             cCarent = Fd->nextchar(indice);
-            if (strchr(par, cCarent))
+            if(isdigit(cCarent))
                 edoAct = 9;
-            else if (strchr(non, cCarent))
-                edoAct = 10;
             else
                 falla();
             break;
         case 9:
             cCarent = Fd->nextchar(indice);
-            if (strchr(par, cCarent))
+            if(isdigit(cCarent))
                 edoAct = 9;
-            else if (strchr(non, cCarent))
-                edoAct = 10;
             else
-                falla();
+                edoAct = 10;
             break;
         case 10:
-            cCarent = Fd->nextchar(indice);
-            if (strchr(non, cCarent))
-                edoAct = 10;
-            else if (strchr(par, cCarent))
-                edoAct = 9;
-            else
-                edoAct = 11;
-            break;
-            // NON - PAR
-        case 11:
             Fd->vretract(indice);
             strcpy(asTokens[k++], "num");
             if (indice >= numBytesArch)
@@ -269,21 +262,21 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             iniToken = indice;
             viniedos();
             break;
-        case 12:
+        case 11:
             cCarent = Fd->nextchar(indice);
             if ((isalpha(cCarent) || cCarent == '_'))
-                edoAct = 13;
+                edoAct = 12;
             else
                 falla();
             break;
-        case 13:
+        case 12:
             cCarent = Fd->nextchar(indice);
             if ((isalpha(cCarent) || cCarent == '_') || isdigit(cCarent))
-                edoAct = 13;
+                edoAct = 12;
             else
-                edoAct = 14;
+                edoAct = 13;
             break;
-        case 14:
+        case 13:
             Fd->vretract(indice);
             if (esId())
                 strcpy(asTokens[k++], "id"); // Estaba escrito diferente al arreglo
@@ -295,17 +288,17 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             viniedos();
             break;
             // <<<-- en este case
-        case 15:
+        case 14:
             cCarent = Fd->nextchar(indice);
             if (cCarent == ';')
-                edoAct = 16;
+                edoAct = 15;
             else
                 falla();
             break;
             /* Al encontrar el caracter ';' , que indica fin de linea,
                  Se copia el caracter '$' al fin del arreglo astokens
                  */
-        case 16:
+        case 15:
             strcpy(asTokens[k++], ";");
             strcpy(asTokens[k], "$");
             if (indice >= numBytesArch)
@@ -313,173 +306,202 @@ void AnalisisLexico::vanalisislexico(int numBytesArch)
             iniToken = indice;
             viniedos();
             break;
-        case 17:
+        case 16:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '[')
-                edoAct = 18;
+                edoAct = 17;
             else
                 falla();
             break;
-        case 18:
+        case 17:
             strcpy(asTokens[k++], "[");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 19:
+        case 18:
             cCarent = Fd->nextchar(indice);
             if (cCarent == ']')
-                edoAct = 20;
+                edoAct = 19;
             else
                 falla();
             break;
-        case 20:
+        case 19:
             strcpy(asTokens[k++], "]");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 21:
+        case 20:
             cCarent = Fd->nextchar(indice);
             if (cCarent == ',')
-                edoAct = 22;
+                edoAct = 21;
             else
                 falla();
             break;
-        case 22:
+        case 21:
             strcpy(asTokens[k++], ",");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 23:
+        case 22:
             cCarent = Fd->nextchar(indice); // funcion que lee el siguiente caracter
             if (('"' == cCarent) && cCarent)
-                edoAct = 24;
+                edoAct = 23;
             else
                 falla();
             break;
-        case 24:
+        case 23:
             cCarent = Fd->nextchar(indice); // funcion que lee el siguiente caracter
             if (('"' != cCarent) && cCarent)
-                edoAct = 24;
+                edoAct = 23;
             else if (cCarent)
-                edoAct = 25;
+                edoAct = 24;
             break;
-        case 25:
+        case 24:
             strcpy(asTokens[k++], "Cte.Lit");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 26:
+        case 25:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '(')
-                edoAct = 27;
+                edoAct = 26;
             else
                 falla();
             break;
-        case 27:
+        case 26:
             strcpy(asTokens[k++], "(");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 28:
+        case 27:
             cCarent = Fd->nextchar(indice);
             if (cCarent == ')')
-                edoAct = 29;
+                edoAct = 28;
             else
                 falla();
             break;
-        case 29:
+        case 28:
             strcpy(asTokens[k++], ")");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 30:
+        case 29:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
-                edoAct = 31;
+                edoAct = 30;
             else
                 falla();
             break;
-        case 31:
+        case 30:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
-                edoAct = 33;
-            else
                 edoAct = 32;
+            else
+                edoAct = 31;
             break;
-        case 32:
+        case 31:
             strcpy(asTokens[k++], "=");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 33:
-            strcpy(asTokens[k++], "op.rel");
+        case 32:
+            strcpy(asTokens[k++], "==");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-        case 34:
+        case 33:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '!')
+                edoAct = 34;
+            else
+                falla();
+            break;
+        case 34:
+            cCarent = Fd->nextchar(indice);
+            if (cCarent == '=')
                 edoAct = 35;
             else
                 falla();
             break;
         case 35:
-            cCarent = Fd->nextchar(indice);
-            if (cCarent == '=')
-                edoAct = 36;
-            else
-                falla();
-            break;
-        case 36:
-            strcpy(asTokens[k++], "op.rel");
+            strcpy(asTokens[k++], "!=");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break; //Hasta aqui jala bien
-        case 37:
+        case 36:
             cCarent = Fd->nextchar(indice);
-            if (cCarent == '<' || cCarent == '>')
-                edoAct = 38;
+            if (cCarent == '<')
+                edoAct = 37;
             else
                 falla();
             break;
-        case 38:
+        case 37:
             cCarent = Fd->nextchar(indice);
             if (cCarent == '=')
-                edoAct = 39; //37?
+                edoAct = 38; //37?
             else
                 edoAct = 39;
             break;
-        case 39:
-            strcpy(asTokens[k++], "op.rel");
+        case 38:
+            strcpy(asTokens[k++], "<=");
             if (indice >= numBytesArch)
                 return;
             iniToken = indice;
             viniedos();
             break;
-            /*case 41: strcpy(asTokens[k++], "op.rel");
-                if (indice>=numBytesArch)
-                 return;
-                iniToken=indice;
-                viniedos();
-                break;*/
+        case 39:
+            strcpy(asTokens[k++], "<");
+            if (indice >= numBytesArch)
+                return;
+            iniToken = indice;
+            viniedos();
+            break;
+        case 40:
+            cCarent = Fd->nextchar(indice);
+            if (cCarent == '>')
+                edoAct = 41;
+            else
+                falla();
+            break;
+        case 41:
+            cCarent = Fd->nextchar(indice);
+            if (cCarent == '=')
+                edoAct = 42; //37?
+            else
+                edoAct = 43;
+            break;
+        case 42:
+            strcpy(asTokens[k++], ">=");
+            if (indice >= numBytesArch)
+                return;
+            iniToken = indice;
+            viniedos();
+            break;
+        case 43:
+            strcpy(asTokens[k++], ">");
+            if (indice >= numBytesArch)
+                return;
+            iniToken = indice;
+            viniedos();
+            break;
 
         } /*switch*/
     }     /*while*/

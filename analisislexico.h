@@ -27,7 +27,7 @@ private:
     Archivo *Fd;
     char PalRes[5][10] = {"char", "float", "int", "puts"}; //printf
     char sLexema[127]; // arreglos para los lexemas y lineas que se utilizaran
-    char non[6] = "13579", par[6] = "24680";
+    //char non[6] = "13579", par[6] = "24680";
     char **asTokens;
 };
 
