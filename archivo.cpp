@@ -87,11 +87,13 @@ int Archivo::bytesarch()
     fseek(Fd, 0L, SEEK_SET);
     return aux;
 }
+
 void Archivo::vretract(int &indice)
 {
     indice--;
     fseek(Fd, (long)indice, SEEK_SET);
 }
+
 char Archivo::nextchar(int &indice)
 {
     char cAux;
@@ -99,7 +101,6 @@ char Archivo::nextchar(int &indice)
     indice++;
     return cAux;
 }
-
 
 void Archivo::cerrararch()
 {

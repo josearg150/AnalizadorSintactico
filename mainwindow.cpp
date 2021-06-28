@@ -5,6 +5,10 @@
 #include "secundario.cpp"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,6 +38,12 @@ void MainWindow::on_actionAbrir_triggered()
     std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
     switch (analisisLex(archivoAbiertoStr)) {
         case 0: {
+            ui->textBrowser->clear();
+            std::ifstream t(archivoAbiertoStr);
+            std::stringstream buffer;
+            buffer << t.rdbuf();
+            QString qstr = QString::fromStdString(buffer.str());
+            ui->textBrowser->append(qstr);
             for (int i = 0; i < returnK(); i++) {
                 ui->tokens->insertRow(i);
                 QTableWidgetItem *aux = new QTableWidgetItem(returnAsTokens()[i]);

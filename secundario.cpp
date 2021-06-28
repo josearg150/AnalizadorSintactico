@@ -26,7 +26,6 @@ void analisisSin() {
         //if (cin.get() == 0) // getch()==0)
         //    cin.get();      // getch();
         as->vanalisis_sintactico();
-        Fd->cerrararch();
         /*cin.get();
         printf("Presiona (sS) para continuar: ");
         resp = cin.get();
@@ -51,7 +50,6 @@ int analisisLex(string archivoAbierto) {
         if (status != 0) {
             return 1;
         }
-
         numBytesArch = Fd->bytesarch();// se guarda el tamaño de kb o bytes del archivo para saber si contiene texto
 
         if (numBytesArch == 0) {
