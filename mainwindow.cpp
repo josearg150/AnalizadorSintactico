@@ -27,7 +27,8 @@ void MainWindow::on_actionSalir_triggered()
 
 void MainWindow::on_actionAbrir_triggered()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
+    QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
+
 }
 
 void MainWindow::on_actionGenerar_triggered()

@@ -1,4 +1,5 @@
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
@@ -10,10 +11,10 @@
 #include "analisissintactico.h"*/
 #include "mainwindow.h"
 #include <QApplication>
-
+/*
 using namespace std;
 
-/*#define MAX 50
+#define MAX 10
 
 int numBytesArch;
 char **asTkns;
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowIcon(QIcon(":/icon.ico"));
     w.show();
-	/*
+    /*
     Fd = new Archivo();
     Pila<string> *pilac = new Pila<string>(MAX);
     asTkns = new char *[MAX];
@@ -74,6 +75,6 @@ int main(int argc, char *argv[])
         resp = cin.get();
         cin.get();
     } while (strchr("Ss", resp));
-	*/
+    */
     return a.exec();
 }
