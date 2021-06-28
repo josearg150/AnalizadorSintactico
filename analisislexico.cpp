@@ -1,4 +1,5 @@
 #include "analisislexico.h"
+#include "mainwindow.h"
 
 AnalisisLexico::AnalisisLexico()
 {
@@ -145,12 +146,11 @@ void AnalisisLexico::recuperaerror()
 
 void AnalisisLexico::vmuestra()
 {
-    int iJ;
     // Se muestran los contenidos del arreglo asTokens introducidos en el analisis lexico
-    puts("\nTokens reconocidos:\n");
-    for (iJ = 0; iJ < k; iJ++) //,Ren++)
+    //puts("\nTokens reconocidos:\n");
+    for (int i = 0; i < k; i++) //,Ren++)
     {
-        puts(asTokens[iJ]);
+        puts(asTokens[i]);
     }
 }
 

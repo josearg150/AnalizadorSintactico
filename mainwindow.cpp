@@ -35,14 +35,13 @@ void MainWindow::on_actionAbrir_triggered()
     ui->producciones->clearContents();
     QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
     std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
-    switch (pseudo_main(archivoAbiertoStr, *this)) {
+    switch (pseudo_main(archivoAbiertoStr)) {
         case 0: {
             QMessageBox* msgbox = new QMessageBox(this);
             msgbox->setAttribute(Qt::WA_DeleteOnClose);
             msgbox->setWindowTitle("Aviso");
             msgbox->setText("El archivo está abierto.");
             msgbox->open();
-
             break;
         }
         case 1: {
