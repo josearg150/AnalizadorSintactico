@@ -26,6 +26,9 @@
     <property name="lineWidth">
      <number>1</number>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
     <column>
      <property name="text">
       <string>Token</string>
@@ -57,6 +60,9 @@
       <width>150</width>
       <height>370</height>
      </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
     </property>
     <property name="showGrid">
      <bool>true</bool>

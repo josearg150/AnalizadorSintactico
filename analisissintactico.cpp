@@ -20,11 +20,11 @@ void AnalisisSintactico::vanalisis_sintactico()
     else
         pilac->push("D");
 
-    printf("\nSalida del analizador sintactico (asTokens):\n\n");
-    printf("Arreglo de tokens:\n\n");
+    //printf("\nSalida del analizador sintactico (asTokens):\n\n");
+    //printf("Arreglo de tokens:\n\n");
     for (i = 0; strcmp(asTokens[i], "$") != 0; i++)//si la tabla no ha quedado vacia, mostramos los tokens
         printf("%s ", asTokens[i]);
-    printf("\n\nProducciones:\n\n");
+    //printf("\n\nProducciones:\n\n");
     do
     {
         strcpy(x,pilac->Tope().c_str());
@@ -54,7 +54,7 @@ void AnalisisSintactico::vanalisis_sintactico()
             {
                 pilac->pop();
                 iast = 0;
-                printf("%-3s -> ", varsint[tablaM[renglon][0]]);
+                //printf("%-3s -> ", varsint[tablaM[renglon][0]]);
                 for (j = 3; iast != 999; j++)//incrementa al final de cada iteracion
                 {
                     iast = tablaM[renglon][j]; //999
@@ -84,7 +84,7 @@ void AnalisisSintactico::vanalisis_sintactico()
             }
             else
             {
-                printf("\n\nError de sintaxis.");
+                //printf("\n\nError de sintaxis.");
                 return;
             }
         }

@@ -8,6 +8,7 @@
 //#include "archivo.cpp"
 #include "analisislexico.h"
 #include "analisissintactico.h"
+#include "ui_mainwindow.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ Archivo *Fd = new Archivo();;
 AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);;
 AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
 
-int pseudo_main(string archivoAbierto) {
+int pseudo_main(string archivoAbierto, Ui::MainWindow *ui) {
 
     for (int i = 0; i <MAX; i++) {
         asTkns[i] = new char[10];
