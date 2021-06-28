@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(800, 460);
+    ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
