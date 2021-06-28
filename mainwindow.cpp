@@ -53,11 +53,13 @@ void MainWindow::on_actionAbrir_triggered()
             break;
         }
         case 1: {
+            /*
             QMessageBox* msgbox = new QMessageBox(this);
             msgbox->setAttribute(Qt::WA_DeleteOnClose);
             msgbox->setWindowTitle("Aviso");
             msgbox->setText("Error al abrir el archivo.");
             msgbox->open();
+            */
             break;
         }
         case 2: {

@@ -1,4 +1,5 @@
 #include "pila.h"
+
 template<class T>
 Pila<T>::Pila(int n)
 {
@@ -11,13 +12,14 @@ Pila<T>::Pila(int n)
 
 template<class T>
 void Pila<T>::push(T valor)
-        {
+{
             vacia = false;
             vec[tope++] = valor;
             if (tope == tam)
                 llena = true;
 
-        }
+}
+
 template<class T>
 T Pila<T>::pop()
 {
@@ -33,17 +35,19 @@ T Pila<T>::pop()
 
 
 }
+
 template<class T>
 bool Pila<T>::esta_vacia()
 {
     return vacia;
 }
+
 template<class T>
 bool Pila<T>::esta_llena()
 {
     return llena;
 }
-//SOLICITAMOS INFO. DEL DATO QUE ESTA EN EL TOPE DE LA PILA
+
 template<class T>
 T Pila<T>::Tope()
 {

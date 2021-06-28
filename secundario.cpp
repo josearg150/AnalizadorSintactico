@@ -3,7 +3,7 @@
 #include <string.h>
 #include <iostream>
 #include "pila.h"
-//#include "pila.cpp"
+#include "pila.cpp"
 #include "archivo.h"
 //#include "archivo.cpp"
 #include "analisislexico.h"
@@ -22,16 +22,7 @@ AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);;
 AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
 
 void analisisSin() {
-        //printf("\nPulsa una tecla para continuar.");
-        //if (cin.get() == 0) // getch()==0)
-        //    cin.get();      // getch();
         as->vanalisis_sintactico();
-        /*cin.get();
-        printf("Presiona (sS) para continuar: ");
-        resp = cin.get();
-        cin.get();*/
-    //} while (strchr("Ss", resp));
-
 }
 
 int analisisLex(string archivoAbierto) {
@@ -39,35 +30,18 @@ int analisisLex(string archivoAbierto) {
         asTkns[i] = new char[10];
     }
 
-    //char resp; // variable para la respuesta de s o n
-    //do
-    //{
-        /*cout << "Generar el archivo? (s/n): ";
-        resp = cin.get();
-        if (strchr("Ss", resp))
-            Fd->generararch();*/
-        int status = Fd->vabrirarch(archivoAbierto);
-        if (status != 0) {
-            return 1;
-        }
-        numBytesArch = Fd->bytesarch();// se guarda el tamaño de kb o bytes del archivo para saber si contiene texto
+    int status = Fd->vabrirarch(archivoAbierto);
+    if (status != 0) {
+        return 1;
+    }
+    numBytesArch = Fd->bytesarch(); // se guarda el tamaño de kb o bytes del archivo para saber si contiene texto
 
-        if (numBytesArch == 0) {
-            return 2;/*
-            printf("El archivo no tiene datos. Pulsa una tecla.");
-            if (cin.get() == 0)
-            {
-                cin.get(); // getch();
-                exit(-1);
-            }*/
-        } else {
-            al->vanalisislexico(numBytesArch);
-        }
-
-        //printf("Salida del Analizador Lexico (asTokens):");
-        //al->vmuestra();
-        //Fd->cerrararch();
-     return 0;
+    if (numBytesArch == 0) {
+        return 2;
+    } else {
+        al->vanalisislexico(numBytesArch);
+    }
+    return 0;
 }
 
 void cerrarArchivo() {
