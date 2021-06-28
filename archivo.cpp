@@ -1,5 +1,7 @@
 #include "archivo.h"
 
+using namespace std;
+
 Archivo::Archivo()
 {
 
@@ -45,29 +47,31 @@ void Archivo::generararch()
     fclose(Fd);
 }
 
-void Archivo::vabrirarch()
+int Archivo::vabrirarch(string nombreArchivo)
 {
         char nomArch[100];
-        char *nombre = new char[100];
+        const char *cstr = nombreArchivo.c_str();
+        /*char *nombre = new char[100];
 
         printf("\nNombre del archivo a abrir (sin extension): ");
         cin.get(); //ELIMINAR EL ENTER
-        cin.getline(nombre, 100, '\n');
-        sprintf(nomArch, "%s.dat", nombre); //,'\0');
+        cin.getline(nombre, 100, '\n');*/
+        sprintf(nomArch, cstr); //,'\0');
 
         //Fd = NULL;
         Fd = fopen(nomArch, "r+b");
 
         if (Fd == NULL)
         {
-            printf("No se puede abrir el archivo.");
-            exit(-1); //cin.get();
-        }
+            // printf("No se puede abrir el archivo.");
+            return 1;
+        }/*
         else
         {
             printf("El archivo esta abierto.\n");
-        }
+        }*/
    // fclose(Fd);
+        return 0;
 }
 
 int Archivo::bytesarch()

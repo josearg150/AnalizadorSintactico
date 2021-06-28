@@ -11,7 +11,7 @@ class Archivo
 public:
     Archivo();
     void generararch();
-    void vabrirarch();
+    int vabrirarch(string nombreArchivo);
     int bytesarch();
     char nextchar(int &indice);
     void vretract(int &indice);

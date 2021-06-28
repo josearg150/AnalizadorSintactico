@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "generararchivo.h"
 #include "ui_generararchivo.h"
+#include "secundario.cpp"
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -28,7 +29,33 @@ void MainWindow::on_actionSalir_triggered()
 void MainWindow::on_actionAbrir_triggered()
 {
     QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
-
+    std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
+    switch (pseudo_main(archivoAbiertoStr)) {
+        case 0: {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setAttribute(Qt::WA_DeleteOnClose);
+            msgbox->setWindowTitle("Aviso");
+            msgbox->setText("El archivo está abierto.");
+            msgbox->open();
+            break;
+        }
+        case 1: {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setAttribute(Qt::WA_DeleteOnClose);
+            msgbox->setWindowTitle("Aviso");
+            msgbox->setText("Error al abrir el archivo.");
+            msgbox->open();
+            break;
+        }
+        case 2: {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setAttribute(Qt::WA_DeleteOnClose);
+            msgbox->setWindowTitle("Aviso");
+            msgbox->setText("El archivo está vacío.");
+            msgbox->open();
+            break;
+        }
+    }
 }
 
 void MainWindow::on_actionGenerar_triggered()
