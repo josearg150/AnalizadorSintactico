@@ -17,6 +17,8 @@ public:
     void vmuestra();
     int esId();
     int k;
+    char** getAsTokens();
+    int getK();
 private:
     int edoAct;
     int edoIni;

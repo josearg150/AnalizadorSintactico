@@ -19,7 +19,7 @@
      <rect>
       <x>40</x>
       <y>30</y>
-      <width>550</width>
+      <width>355</width>
       <height>370</height>
      </rect>
     </property>
@@ -40,24 +40,13 @@
       </font>
      </property>
     </column>
-    <column>
-     <property name="text">
-      <string>Lexema</string>
-     </property>
-     <property name="font">
-      <font>
-       <family>Segoe UI</family>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-    </column>
    </widget>
    <widget class="QTableWidget" name="producciones">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>400</x>
       <y>30</y>
-      <width>150</width>
+      <width>355</width>
       <height>370</height>
      </rect>
     </property>

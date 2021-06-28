@@ -555,3 +555,11 @@ void AnalisisLexico::viniedos()
     edoAct = 0;
     edoIni = 0;
 }
+
+char** AnalisisLexico::getAsTokens() {
+    return this->asTokens;
+}
+
+int AnalisisLexico::getK() {
+    return this->k;
+}

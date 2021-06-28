@@ -14,9 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(800, 460);
     ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tokens->clearContents();
-    ui->producciones->clearContents();
-    ui->tokens->insertRow(3);
 }
 
 MainWindow::~MainWindow()
@@ -35,13 +32,14 @@ void MainWindow::on_actionAbrir_triggered()
     ui->producciones->clearContents();
     QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
     std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
-    switch (pseudo_main(archivoAbiertoStr)) {
+    switch (analisisLex(archivoAbiertoStr)) {
         case 0: {
-            QMessageBox* msgbox = new QMessageBox(this);
-            msgbox->setAttribute(Qt::WA_DeleteOnClose);
-            msgbox->setWindowTitle("Aviso");
-            msgbox->setText("El archivo está abierto.");
-            msgbox->open();
+            for (int i = 0; i < returnK(); i++) {
+                ui->tokens->insertRow(i);
+                QTableWidgetItem *aux = new QTableWidgetItem(returnAsTokens()[i]);
+                aux->setTextAlignment(Qt::AlignCenter);
+                ui->tokens->setItem(i, 0, aux);
+            }
             break;
         }
         case 1: {
@@ -61,6 +59,7 @@ void MainWindow::on_actionAbrir_triggered()
             break;
         }
     }
+    cerrarArchivo();
 }
 
 void MainWindow::on_actionGenerar_triggered()

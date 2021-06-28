@@ -21,8 +21,21 @@ Archivo *Fd = new Archivo();;
 AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);;
 AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
 
-int pseudo_main(string archivoAbierto) {
+void analisisSin() {
+        //printf("\nPulsa una tecla para continuar.");
+        //if (cin.get() == 0) // getch()==0)
+        //    cin.get();      // getch();
+        as->vanalisis_sintactico();
+        Fd->cerrararch();
+        /*cin.get();
+        printf("Presiona (sS) para continuar: ");
+        resp = cin.get();
+        cin.get();*/
+    //} while (strchr("Ss", resp));
 
+}
+
+int analisisLex(string archivoAbierto) {
     for (int i = 0; i <MAX; i++) {
         asTkns[i] = new char[10];
     }
@@ -54,17 +67,19 @@ int pseudo_main(string archivoAbierto) {
         }
 
         //printf("Salida del Analizador Lexico (asTokens):");
-        al->vmuestra();
+        //al->vmuestra();
+        //Fd->cerrararch();
+     return 0;
+}
 
-        //printf("\nPulsa una tecla para continuar.");
-        //if (cin.get() == 0) // getch()==0)
-        //    cin.get();      // getch();
-        as->vanalisis_sintactico();
-        Fd->cerrararch();
-        /*cin.get();
-        printf("Presiona (sS) para continuar: ");
-        resp = cin.get();
-        cin.get();*/
-    //} while (strchr("Ss", resp));
-    return 0;
+void cerrarArchivo() {
+    Fd->cerrararch();
+}
+
+char** returnAsTokens() {
+    return al->getAsTokens();
+}
+
+int returnK() {
+    return al->getK();
 }
