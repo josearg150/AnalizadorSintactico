@@ -15,6 +15,13 @@ public:
     explicit generarArchivo(QWidget *parent = nullptr);
     ~generarArchivo();
 
+private slots:
+    void on_btnLimpiar_clicked();
+
+    void on_btnCancelar_clicked();
+
+    void on_btnGenerar_clicked();
+
 private:
     Ui::generarArchivo *ui;
 };

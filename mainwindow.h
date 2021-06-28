@@ -23,6 +23,10 @@ private slots:
 
     void on_actionGenerar_triggered();
 
+    void on_actionAyuda_triggered();
+
+    void on_actionAcerca_de_triggered();
+
 private:
     Ui::MainWindow *ui;
     generarArchivo *genVentana;

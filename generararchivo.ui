@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Generar Archivo</string>
   </property>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="textoAnalizado">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -24,50 +24,69 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <family>Segoe UI</family>
+     <pointsize>13</pointsize>
     </font>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>320</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Limpiar</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btnLimpiar">
    <property name="geometry">
     <rect>
      <x>140</x>
      <y>320</y>
      <width>80</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>Cancelar</string>
+    <string>Limpiar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btnCancelar">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>320</y>
+     <width>80</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGenerar">
    <property name="geometry">
     <rect>
      <x>50</x>
      <y>320</y>
      <width>80</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Generar</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="labelIns">
    <property name="geometry">
     <rect>
      <x>50</x>
