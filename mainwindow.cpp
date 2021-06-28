@@ -73,7 +73,7 @@ void MainWindow::on_actionAbrir_triggered()
 
     switch (analisisSin()) {
         case 0: {
-            for (int j = 0; j < 20; j++) {
+            for (int j = 0; j < 50; j++) {
                 std::string str = as->producciones[j];
                 QString qstr = QString::fromStdString(str);
                 ui->producciones->insertRow(j);
@@ -116,6 +116,6 @@ void MainWindow::on_actionAcerca_de_triggered()
     QMessageBox* msgbox = new QMessageBox(this);
     msgbox->setAttribute(Qt::WA_DeleteOnClose);
     msgbox->setWindowTitle("Acerca de");
-    msgbox->setText("© Padres de Familia 4A\nVersión 1.0");
+    msgbox->setText("© Padres de Familia 4A\nVersión 1.0 y final");
     msgbox->open();
 }
