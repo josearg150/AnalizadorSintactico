@@ -2,16 +2,15 @@
 #include "pila.h"
 #include "pila.cpp"
 
-
 AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 {
     asTokens = asTkns;
     pilac = pila;
 }
 
-void AnalisisSintactico::vanalisis_sintactico()
+int AnalisisSintactico::vanalisis_sintactico()
 {
-    int ip = 0, i, j;
+    int ip = 0, i, j, z = 0;
     int renglon, iast;
     char x[10], a[10];//Arreglos de 10 porque el asTokens posee una cadena de 7 caracteres
     pilac->push("$");
@@ -22,8 +21,8 @@ void AnalisisSintactico::vanalisis_sintactico()
 
     //printf("\nSalida del analizador sintactico (asTokens):\n\n");
     //printf("Arreglo de tokens:\n\n");
-    for (i = 0; strcmp(asTokens[i], "$") != 0; i++)//si la tabla no ha quedado vacia, mostramos los tokens
-        printf("%s ", asTokens[i]);
+    //for (i = 0; strcmp(asTokens[i], "$") != 0; i++)//si la tabla no ha quedado vacia, mostramos los tokens
+    //    printf("%s ", asTokens[i]);
     //printf("\n\nProducciones:\n\n");
     do
     {
@@ -55,21 +54,27 @@ void AnalisisSintactico::vanalisis_sintactico()
                 pilac->pop();
                 iast = 0;
                 //printf("%-3s -> ", varsint[tablaM[renglon][0]]);
+                //producciones[z] = "%-3s -> ";
+                producciones[z] = varsint[tablaM[renglon][0]];
+                producciones[z] += " -> ";
                 for (j = 3; iast != 999; j++)//incrementa al final de cada iteracion
                 {
                     iast = tablaM[renglon][j]; //999
                     if (iast < 0)
                     {
                         iast *= -1;
-                        printf("%s ", token[iast]);
+                        //printf("%s ", token[iast]);
+                        producciones[z] += token[iast];
                     }
                     else
                     {
                         if (iast != 999)
-                            printf("%s", varsint[iast]);
+                            //printf("%s", varsint[iast]);
+                            producciones[z] += varsint[iast];
                     }
                 }
-                printf("\n");
+                //printf("\n");
+                producciones[z] += "\n";
                 for (i = j - 2; i > 2; i--)
                 {
                     iast = tablaM[renglon][i];
@@ -81,14 +86,16 @@ void AnalisisSintactico::vanalisis_sintactico()
                     else
                         pilac->push(varsint[iast]);
                 }
+                z++;
             }
             else
             {
                 //printf("\n\nError de sintaxis.");
-                return;
+                return 1;
             }
         }
     } while (strcmp(x, "$") != 0);
+    return 0;
 }
 
 int AnalisisSintactico::buscaTabla(char a[], char x[])

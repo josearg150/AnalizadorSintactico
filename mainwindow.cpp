@@ -32,10 +32,11 @@ void MainWindow::on_actionSalir_triggered()
 
 void MainWindow::on_actionAbrir_triggered()
 {
-    ui->tokens->clearContents();
-    ui->producciones->clearContents();
     QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
     std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
+    ui->tokens->clearContents();
+    ui->producciones->clearContents();
+
     switch (analisisLex(archivoAbiertoStr)) {
         case 0: {
             ui->textBrowser->clear();
@@ -53,13 +54,11 @@ void MainWindow::on_actionAbrir_triggered()
             break;
         }
         case 1: {
-            /*
             QMessageBox* msgbox = new QMessageBox(this);
             msgbox->setAttribute(Qt::WA_DeleteOnClose);
             msgbox->setWindowTitle("Aviso");
-            msgbox->setText("Error al abrir el archivo.");
+            msgbox->setText("No se seleccionó ningún archivo.");
             msgbox->open();
-            */
             break;
         }
         case 2: {
@@ -71,6 +70,27 @@ void MainWindow::on_actionAbrir_triggered()
             break;
         }
     }
+
+    switch (analisisSin()) {
+        case 0: {
+            for (int j = 0; j < 20; j++) {
+                std::string str = as->producciones[j];
+                QString qstr = QString::fromStdString(str);
+                ui->producciones->insertRow(j);
+                QTableWidgetItem *aux = new QTableWidgetItem(qstr);
+                aux->setTextAlignment(Qt::AlignLeft);
+                ui->producciones->setItem(j, 0, aux);
+            }
+        }
+        case 1: {
+            QMessageBox* msgbox = new QMessageBox(this);
+            msgbox->setAttribute(Qt::WA_DeleteOnClose);
+            msgbox->setWindowTitle("Aviso");
+            msgbox->setText("Error de sintaxis.");
+            msgbox->open();
+        }
+    }
+
     cerrarArchivo();
 }
 

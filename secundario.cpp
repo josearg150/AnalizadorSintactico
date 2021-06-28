@@ -21,8 +21,8 @@ Archivo *Fd = new Archivo();;
 AnalisisLexico *al = new AnalisisLexico(Fd, asTkns);;
 AnalisisSintactico *as = new AnalisisSintactico(asTkns, pilac);
 
-void analisisSin() {
-        as->vanalisis_sintactico();
+int analisisSin() {
+    return as->vanalisis_sintactico();
 }
 
 int analisisLex(string archivoAbierto) {
