@@ -11,7 +11,7 @@
 
 using namespace std;
 
-#define MAX 10
+#define MAX 50
 
 int numBytesArch;
 char **asTkns = asTkns = new char *[MAX];
