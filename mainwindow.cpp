@@ -51,13 +51,13 @@ void MainWindow::on_actionAbrir_triggered()
 {
     QString archivoAbierto = QFileDialog::getOpenFileName(this, tr("Abrir Archivo"), ".", tr("Archivos (*.dat)"));
     std::string archivoAbiertoStr = archivoAbierto.toLocal8Bit().constData();
-    ui->tokens->clearContents();
-    ui->producciones->clearContents();
-    ui->tokens->setRowCount(0);
-    ui->producciones->setRowCount(0);
 
     switch (analisisLex(archivoAbiertoStr)) {
         case 0: {
+            ui->tokens->clearContents();
+            ui->producciones->clearContents();
+            ui->tokens->setRowCount(0);
+            ui->producciones->setRowCount(0);
             ui->textBrowser->clear();
             std::ifstream t(archivoAbiertoStr);
             std::stringstream buffer;
@@ -69,6 +69,25 @@ void MainWindow::on_actionAbrir_triggered()
                 QTableWidgetItem *aux = new QTableWidgetItem(returnAsTokens()[i]);
                 aux->setTextAlignment(Qt::AlignCenter);
                 ui->tokens->setItem(i, 0, aux);
+            }
+            if (analisisSin() == 0) {
+                for (int j = 0; j < 50; j++) {
+                    std::string str = as->producciones[j];
+                    if (str == "") {
+                        break;
+                    }
+                    QString qstr = QString::fromStdString(str);
+                    ui->producciones->insertRow(j);
+                    QTableWidgetItem *aux = new QTableWidgetItem(qstr);
+                    aux->setTextAlignment(Qt::AlignLeft);
+                    ui->producciones->setItem(j, 0, aux);
+                }
+            } else {
+                QMessageBox* msgbox = new QMessageBox(this);
+                msgbox->setAttribute(Qt::WA_DeleteOnClose);
+                msgbox->setWindowTitle("Aviso");
+                msgbox->setText("Error de sintaxis.");
+                msgbox->open();
             }
             break;
         }
@@ -88,26 +107,6 @@ void MainWindow::on_actionAbrir_triggered()
             msgbox->open();
             break;
         }
-    }
-
-    if (analisisSin() == 0) {
-        for (int j = 0; j < 50; j++) {
-            std::string str = as->producciones[j];
-            if (str == "") {
-                break;
-            }
-            QString qstr = QString::fromStdString(str);
-            ui->producciones->insertRow(j);
-            QTableWidgetItem *aux = new QTableWidgetItem(qstr);
-            aux->setTextAlignment(Qt::AlignLeft);
-            ui->producciones->setItem(j, 0, aux);
-        }
-    } else {
-        QMessageBox* msgbox = new QMessageBox(this);
-        msgbox->setAttribute(Qt::WA_DeleteOnClose);
-        msgbox->setWindowTitle("Aviso");
-        msgbox->setText("Error de sintaxis.");
-        msgbox->open();
     }
 
     /*
