@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>650</width>
     <height>400</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>60</y>
-     <width>500</width>
+     <y>80</y>
+     <width>551</width>
      <height>250</height>
     </rect>
    </property>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>320</y>
+     <y>340</y>
      <width>80</width>
      <height>30</height>
     </rect>
@@ -43,6 +43,9 @@
      <family>Segoe UI</family>
      <pointsize>11</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #dedede; background-color: #5a5a5a;</string>
    </property>
    <property name="text">
     <string>Limpiar</string>
@@ -51,9 +54,9 @@
   <widget class="QPushButton" name="btnCancelar">
    <property name="geometry">
     <rect>
-     <x>470</x>
-     <y>320</y>
-     <width>80</width>
+     <x>459</x>
+     <y>340</y>
+     <width>91</width>
      <height>30</height>
     </rect>
    </property>
@@ -63,15 +66,18 @@
      <pointsize>11</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: #dedede; background-color: #5a5a5a;</string>
+   </property>
    <property name="text">
-    <string>Salir</string>
+    <string>Terminar</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btnGenerar">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>320</y>
+     <y>340</y>
      <width>80</width>
      <height>30</height>
     </rect>
@@ -81,6 +87,9 @@
      <family>Segoe UI</family>
      <pointsize>11</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #dedede; background-color: #5a5a5a;</string>
    </property>
    <property name="text">
     <string>Generar</string>
@@ -91,8 +100,8 @@
     <rect>
      <x>50</x>
      <y>30</y>
-     <width>441</width>
-     <height>21</height>
+     <width>551</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -103,6 +112,9 @@
      <bold>false</bold>
      <kerning>true</kerning>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #dedede;</string>
    </property>
    <property name="text">
     <string>Introduce aquí las declaraciones y expresiones a evaluar:</string>

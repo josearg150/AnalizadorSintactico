@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->textBrowser->setStyleSheet("background: #5a5a5a; color: #fff;");
     ui->tokens->setAlternatingRowColors(true);
     ui->tokens->setStyleSheet("background: #5a5a5a; color: #fff;\
-                                alternate-background-color: #7a7a7a; font-size: 35");
+                                alternate-background-color: #7a7a7a; font-size: 35;");
     ui->producciones->setAlternatingRowColors(true);
     ui->producciones->setStyleSheet("background: #5a5a5a; color: #fff;\
-                                    alternate-background-color: #7a7a7a; font-size: 35");
+                                    alternate-background-color: #7a7a7a; font-size: 35;");
 
     ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

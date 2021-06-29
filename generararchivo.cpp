@@ -12,7 +12,9 @@ generarArchivo::generarArchivo(QWidget *parent) :
     ui(new Ui::generarArchivo)
 {
     ui->setupUi(this);
-    this->setFixedSize(600, 400);
+    this->setFixedSize(650, 400);
+    this->setStyleSheet("background: #2a2a2a; "); //negro
+    ui->textoAnalizado->setStyleSheet("background: #5a5a5a; color: #ededed;"); //negro
 }
 
 generarArchivo::~generarArchivo()
@@ -37,6 +39,7 @@ void generarArchivo::on_btnGenerar_clicked()
         msgbox->setAttribute(Qt::WA_DeleteOnClose);
         msgbox->setWindowTitle("Advertencia");
         msgbox->setText("El contenido del archivo no puede estar vacío.");
+        msgbox->setStyleSheet("color: #dedede;");
         msgbox->open();
     } else {
         QString contenido = ui->textoAnalizado->toPlainText();

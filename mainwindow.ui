@@ -141,9 +141,6 @@
       <bold>false</bold>
      </font>
     </property>
-    <property name="styleSheet">
-     <string notr="true">text-align: center;</string>
-    </property>
     <property name="frameShape">
      <enum>QFrame::Panel</enum>
     </property>
