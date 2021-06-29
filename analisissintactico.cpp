@@ -1,6 +1,9 @@
 #include "analisissintactico.h"
 #include "pila.h"
 #include "pila.cpp"
+#include <iostream>
+
+using namespace std;
 
 AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 {
@@ -10,6 +13,7 @@ AnalisisSintactico::AnalisisSintactico(char **asTkns, Pila<string> *pila)
 
 int AnalisisSintactico::vanalisis_sintactico()
 {
+
     int ip = 0, i, j, z = 0;
     int renglon, iast;
     char x[10], a[10];//Arreglos de 10 porque el asTokens posee una cadena de 7 caracteres
@@ -96,10 +100,12 @@ int AnalisisSintactico::vanalisis_sintactico()
         }
     } while (strcmp(x, "$") != 0);
     return 0;
+
 }
 
 int AnalisisSintactico::buscaTabla(char a[], char x[])
 {
+
     // se usan dos indices para representar x y a que seran comparados
     int indx = 0, inda = 0, i;
     for (i = 0; i < numTokens; i++)          // el primer ciclo compara contra el arreglo token  para compara si contiene

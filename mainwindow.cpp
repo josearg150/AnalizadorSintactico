@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(1000, 460);
+    this->setFixedSize(1000, 568);
 
     ui->centralwidget->setStyleSheet("background: #2a2a2a;"); //negro
 
