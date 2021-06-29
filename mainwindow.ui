@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>980</width>
     <height>460</height>
    </rect>
   </property>
@@ -17,9 +17,9 @@
    <widget class="QTableWidget" name="tokens">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>410</x>
       <y>30</y>
-      <width>200</width>
+      <width>250</width>
       <height>370</height>
      </rect>
     </property>
@@ -59,6 +59,13 @@
        </colorrole>
       </disabled>
      </palette>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="frameShape">
      <enum>QFrame::Panel</enum>
@@ -84,9 +91,9 @@
    <widget class="QTableWidget" name="producciones">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>690</x>
       <y>30</y>
-      <width>200</width>
+      <width>250</width>
       <height>370</height>
      </rect>
     </property>
@@ -126,6 +133,16 @@
        </colorrole>
       </disabled>
      </palette>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">text-align: center;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Panel</enum>
@@ -153,14 +170,16 @@
      <rect>
       <x>35</x>
       <y>30</y>
-      <width>300</width>
+      <width>351</width>
       <height>370</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI</family>
-      <pointsize>9</pointsize>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="frameShape">
@@ -173,7 +192,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>980</width>
      <height>25</height>
     </rect>
    </property>

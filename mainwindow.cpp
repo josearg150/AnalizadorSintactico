@@ -15,23 +15,26 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(800, 460);
+    this->setFixedSize(1000, 460);
 
-    ui->centralwidget->setStyleSheet("background: #4a4a4a;"); //negro
+    ui->centralwidget->setStyleSheet("background: #2a2a2a;"); //negro
 
     ui->menuArchivo->setStyleSheet("background: #4f4f4f; color: #fafafa;");
     ui->menuAyuda->setStyleSheet("background: #4f4f4f; color: #fafafa;");
 
-    ui->textBrowser->setStyleSheet("background: #cdcdcd; color: #000;");
+    ui->textBrowser->setStyleSheet("background: #5a5a5a; color: #fff;");
     ui->tokens->setAlternatingRowColors(true);
-    ui->tokens->setStyleSheet("background: #bcbcbc; color: #000;\
-                                alternate-background-color: #cdcdcd;");
+    ui->tokens->setStyleSheet("background: #5a5a5a; color: #fff;\
+                                alternate-background-color: #7a7a7a; font-size: 35");
     ui->producciones->setAlternatingRowColors(true);
-    ui->producciones->setStyleSheet("background: #bcbcbc; color: #000;\
-                                    alternate-background-color: #cdcdcd; ");
+    ui->producciones->setStyleSheet("background: #5a5a5a; color: #fff;\
+                                    alternate-background-color: #7a7a7a; font-size: 35");
 
     ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->producciones->verticalHeader()->setStyleSheet("background-color: #fff; color: black");
+    ui->tokens->verticalHeader()->setStyleSheet("background-color: #fff; color: black");
 }
 
 MainWindow::~MainWindow()
