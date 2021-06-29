@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Generar Archivo</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 219, 221);</string>
+  </property>
   <widget class="QPlainTextEdit" name="textoAnalizado">
    <property name="geometry">
     <rect>
@@ -24,25 +27,40 @@
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
-     <pointsize>13</pointsize>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 32, 32);
+font: 8pt &quot;JetBrains Mono&quot;;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btnLimpiar">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>320</y>
-     <width>80</width>
-     <height>30</height>
+     <x>230</x>
+     <y>340</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
-     <pointsize>11</pointsize>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 181, 144);
+font: 8pt &quot;JetBrains Mono&quot;;
+color: rgb(97, 12, 14);</string>
    </property>
    <property name="text">
     <string>Limpiar</string>
@@ -51,17 +69,25 @@
   <widget class="QPushButton" name="btnCancelar">
    <property name="geometry">
     <rect>
-     <x>470</x>
-     <y>320</y>
-     <width>80</width>
-     <height>30</height>
+     <x>410</x>
+     <y>340</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
-     <pointsize>11</pointsize>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 181, 144);
+font: 8pt &quot;JetBrains Mono&quot;;
+color: rgb(97, 12, 14);</string>
    </property>
    <property name="text">
     <string>Salir</string>
@@ -71,16 +97,24 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>320</y>
-     <width>80</width>
-     <height>30</height>
+     <y>340</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
-     <pointsize>11</pointsize>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 181, 144);
+font: 8pt &quot;JetBrains Mono&quot;;
+color: rgb(97, 12, 14);</string>
    </property>
    <property name="text">
     <string>Generar</string>
@@ -97,12 +131,16 @@
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
-     <pointsize>12</pointsize>
+     <family>JetBrains Mono</family>
+     <pointsize>8</pointsize>
      <weight>50</weight>
+     <italic>false</italic>
      <bold>false</bold>
      <kerning>true</kerning>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 8pt &quot;JetBrains Mono&quot;;</string>
    </property>
    <property name="text">
     <string>Introduce aquí las declaraciones y expresiones a evaluar:</string>
