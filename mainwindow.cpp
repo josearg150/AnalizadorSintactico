@@ -16,6 +16,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(800, 460);
+
+    ui->centralwidget->setStyleSheet("background: #4a4a4a;"); //negro
+
+    ui->menuArchivo->setStyleSheet("background: #4f4f4f; color: #fafafa;");
+    ui->menuAyuda->setStyleSheet("background: #4f4f4f; color: #fafafa;");
+
+    ui->textBrowser->setStyleSheet("background: #cdcdcd; color: #000;");
+    ui->tokens->setAlternatingRowColors(true);
+    ui->tokens->setStyleSheet("background: #bcbcbc; color: #000;\
+                                alternate-background-color: #cdcdcd;");
+    ui->producciones->setAlternatingRowColors(true);
+    ui->producciones->setStyleSheet("background: #bcbcbc; color: #000;\
+                                    alternate-background-color: #cdcdcd; ");
+
     ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -125,7 +139,7 @@ void MainWindow::on_actionGenerar_triggered()
 {
     genVentana = new generarArchivo();
     genVentana->setAttribute(Qt::WA_DeleteOnClose);
-    genVentana->setWindowIcon(QIcon(":/icon.ico"));
+    genVentana->setWindowIcon(QIcon(":/icono.jpg"));
     genVentana->show();
 }
 
