@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>980</width>
-    <height>568</height>
+    <width>1068</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QTableWidget" name="tokens">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>30</y>
+      <x>450</x>
+      <y>80</y>
       <width>250</width>
       <height>471</height>
      </rect>
@@ -76,6 +76,12 @@
     <property name="editTriggers">
      <set>QAbstractItemView::NoEditTriggers</set>
     </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>Token</string>
@@ -91,9 +97,9 @@
    <widget class="QTableWidget" name="producciones">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>30</y>
-      <width>250</width>
+      <x>770</x>
+      <y>80</y>
+      <width>251</width>
       <height>471</height>
      </rect>
     </property>
@@ -150,6 +156,15 @@
     <property name="showGrid">
      <bool>true</bool>
     </property>
+    <property name="gridStyle">
+     <enum>Qt::SolidLine</enum>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>Producción</string>
@@ -166,7 +181,7 @@
     <property name="geometry">
      <rect>
       <x>35</x>
-      <y>30</y>
+      <y>80</y>
       <width>351</width>
       <height>471</height>
      </rect>
@@ -183,14 +198,83 @@
      <enum>QFrame::Panel</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>30</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#D69542;</string>
+    </property>
+    <property name="text">
+     <string>Editor</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>30</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#D69542;</string>
+    </property>
+    <property name="text">
+     <string>Tokens</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>30</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#D69542;</string>
+    </property>
+    <property name="text">
+     <string>Producciones </string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>980</width>
-     <height>25</height>
+     <width>1068</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

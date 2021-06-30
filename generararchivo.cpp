@@ -12,9 +12,9 @@ generarArchivo::generarArchivo(QWidget *parent) :
     ui(new Ui::generarArchivo)
 {
     ui->setupUi(this);
-    this->setFixedSize(650, 400);
+    this->setFixedSize(690, 400);
     this->setStyleSheet("background: #2a2a2a; "); //negro
-    ui->textoAnalizado->setStyleSheet("background: #5a5a5a; color: #ededed;"); //negro
+    ui->textoAnalizado->setStyleSheet("background: #5a5a5a; color: #D69542;"); //negro
 }
 
 generarArchivo::~generarArchivo()

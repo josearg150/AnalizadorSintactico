@@ -15,26 +15,26 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(1000, 568);
+    this->setFixedSize(1050, 668);
 
     ui->centralwidget->setStyleSheet("background: #2a2a2a;"); //negro
 
     ui->menuArchivo->setStyleSheet("background: #4f4f4f; color: #fafafa;");
     ui->menuAyuda->setStyleSheet("background: #4f4f4f; color: #fafafa;");
 
-    ui->textBrowser->setStyleSheet("background: #5a5a5a; color: #fff;");
+    ui->textBrowser->setStyleSheet("background: #4a4a4a; color: #D69542;");
     ui->tokens->setAlternatingRowColors(true);
-    ui->tokens->setStyleSheet("background: #5a5a5a; color: #fff;\
-                                alternate-background-color: #7a7a7a; font-size: 35;");
+    ui->tokens->setStyleSheet("background: #4a4a4a; color: #D69542;\
+                                alternate-background-color: #5a5a5a; font-size: 35;");
     ui->producciones->setAlternatingRowColors(true);
-    ui->producciones->setStyleSheet("background: #5a5a5a; color: #fff;\
-                                    alternate-background-color: #7a7a7a; font-size: 35;");
+    ui->producciones->setStyleSheet("background: #4a4a4a; color: #D69542;\
+                                    alternate-background-color: #5a5a5a; font-size: 35;");
 
     ui->tokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->producciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->producciones->verticalHeader()->setStyleSheet("background-color: #fff; color: black");
-    ui->tokens->verticalHeader()->setStyleSheet("background-color: #fff; color: black");
+    ui->producciones->verticalHeader()->setStyleSheet("color: black");
+    ui->tokens->verticalHeader()->setStyleSheet("background-color: #2a2a2a; color: black");
 }
 
 MainWindow::~MainWindow()
@@ -141,7 +141,7 @@ void MainWindow::on_actionGenerar_triggered()
 {
     genVentana = new generarArchivo();
     genVentana->setAttribute(Qt::WA_DeleteOnClose);
-    genVentana->setWindowIcon(QIcon(":/icono.jpg"));
+    genVentana->setWindowIcon(QIcon(":/icon.ico"));
     genVentana->show();
 }
 
